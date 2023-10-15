@@ -18,9 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class PostgresDBUserManagerImpl implements UserManager {
     //ToDo für Authentifizierung an der Datenbank
-    String databaseURL = "jdbc:postgresql://ec2-34-202-127-5.compute-1.amazonaws.com:5432/defa4ehgv6lm5";
-    String username = "etjbssbrohalwp";
-    String password = "2d579abf3a3eb6e77a889ca22e20677c6b88c60041a2d6c8796d547bf0ae5e99";
+    String databaseURL = "jdbc:postgresql://ec2-52-1-92-133.compute-1.amazonaws.com:5432/dbq8q1o8ump5db";
+    String username = "qkmdiqnoiwgfyj";
+    String password = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
 
     public List<User> readAllUsers(){
         List<User> myList = new ArrayList<>();
