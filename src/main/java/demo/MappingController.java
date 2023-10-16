@@ -40,4 +40,14 @@ public SendBackToken userLogin(@RequestBody User user){
 
         return "Log off was succesfull";
     }
+
+    @GetMapping(
+            path = ("/user/all"),
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public String getAllUsers(){
+
+    return "Hallo ich funktioniere";
+    }
+
 }
