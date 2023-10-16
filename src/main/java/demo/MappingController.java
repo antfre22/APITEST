@@ -36,8 +36,8 @@ public SendBackToken userLogin(@RequestBody User user){
         path=("/auth/logoff"),
         consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public SendBackToken userLogoff(@RequestBody User user){
+    public String userLogoff(@RequestBody User user){
 
-        return new SendBackToken("jhnaosvgioa gvi",67978);
+        return "Log off was succesfull";
     }
 }
