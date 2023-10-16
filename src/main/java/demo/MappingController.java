@@ -27,8 +27,17 @@ public class MappingController {
         path=("/auth/login"),
         consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 )
-public SendBackToken userLog(@RequestBody User user){
+public SendBackToken userLogin(@RequestBody User user){
 
     return new SendBackToken("jhnaosvgioa gvi",67978);
 }
+
+@DeleteMapping (
+        path=("/auth/logoff"),
+        consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public SendBackToken userLogoff(@RequestBody User user){
+
+        return new SendBackToken("jhnaosvgioa gvi",67978);
+    }
 }
