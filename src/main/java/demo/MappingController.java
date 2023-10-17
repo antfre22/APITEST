@@ -22,17 +22,28 @@ public class MappingController {
     //ToDo: API_Design Tabelle aus GoogleDrive Ordner anschauen und demnach vorgehen
     // bzw. Methoden erstellen, bei Hartwig nachschauen wegen genauen Bezeichnungen
     //Testen der HTTP:Resquest mit Prestige.dev und den passenden URL und HTTP-Aufrufe
+
+    /*
+     GET-Methode
+      für Basic-Abfrage ob Server "alive" ist
+     */
     @GetMapping("/auth")
+
     public String getInfo(@RequestParam(value = "name", defaultValue = "Student") String name) {
         Logger.getLogger("MappingController").log(Level.INFO,"MappingController auth " + name);
-        return "ok";
+        return "im alive guys";
     }
+    /*
+     Post-Methode
+      für den Login eines Users in das System
+     */
 @PostMapping(
         path=("/auth/login"),
         consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 )
+@ResponseStatus(HttpStatus.OK)
 public SendBackToken userLogin(@RequestBody User user){
-
+    //To-do: Check Verification of the token
     return new SendBackToken("jhnaosvgioa gvi",67978);
 }
 
@@ -40,7 +51,7 @@ public SendBackToken userLogin(@RequestBody User user){
         path=("/auth/logoff"),
         consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public String userLogoff(@RequestBody User user){
+    public String userLogoff(){
 
         return "Log off was succesfull";
     }
