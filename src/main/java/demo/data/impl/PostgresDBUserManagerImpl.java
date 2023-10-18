@@ -2,6 +2,7 @@ package demo.data.impl;
 
 import demo.data.api.UserManager;
 import demo.data.api.User;
+import org.apache.commons.dbcp.BasicDataSource;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,10 +18,59 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class PostgresDBUserManagerImpl implements UserManager {
-    //ToDo für Authentifizierung an der Datenbank
-    String databaseURL = "jdbc:postgresql://ec2-34-202-127-5.compute-1.amazonaws.com:5432/defa4ehgv6lm5";
-    String username = "etjbssbrohalwp";
-    String password = "2d579abf3a3eb6e77a889ca22e20677c6b88c60041a2d6c8796d547bf0ae5e99";
+    String databaseURL = "jdbc:postgresql://ec2-52-1-92-133.compute-1.amazonaws.com:5432/dbq8q1o8ump5db";
+    String username = "qkmdiqnoiwgfyj";
+    String password = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
+
+    BasicDataSource basicDataSource;
+
+    // Singleton
+    static PostgresDBUserManagerImpl postgresDBUserManager = null;
+    private PostgresDBUserManagerImpl() {
+        basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(databaseURL);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+    }
+    public static PostgresDBUserManagerImpl getPostgresDBUserManagerImpl() {
+        if (postgresDBUserManager == null)
+            postgresDBUserManager = new PostgresDBUserManagerImpl();
+        return postgresDBUserManager;
+    }
+
+    public void createUserTable() {
+
+        //  It deletes data if table already exists.
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+
+            String createTable = "CREATE TABLE users (" +
+                    "id SERIAL PRIMARY KEY, " +
+                    "firstname varchar(100) NOT NULL, " +
+                    "lastname varchar(100) NOT NULL, " +
+                    "password varchar(100) NOT NULL, " +
+                    "email varchar(100) NOT NULL, " +
+                    "token varchar(100) NOT NULL, " +
+                    "validuntil int NOT NULL)";
+
+
+            stmt.executeUpdate(createTable);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public List<User> readAllUsers(){
         List<User> myList = new ArrayList<>();
