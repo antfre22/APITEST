@@ -31,7 +31,7 @@ public class MappingController {
      */
     @GetMapping("/auth")
 
-    public String getInfo(@RequestParam(value = "name", defaultValue = "Student") String name) {
+    public String getInfo(@RequestParam(value = "name", defaultValue = "User") String name) {
         Logger.getLogger("MappingController").log(Level.INFO, "MappingController auth " + name);
         return "im alive guys";
     }
@@ -47,6 +47,9 @@ public class MappingController {
     @ResponseStatus(HttpStatus.OK)
     public SendBackToken userLogin(@RequestBody User user) {
         //To-do: Check Verification of the token
+        //Step 1: Check Token des Users
+        //Step 2: Wie viele Sekunden soll dieser gelten ?
+
         return new SendBackToken("jhnaosvgioa gvi", 67978);
     }
 
@@ -55,7 +58,8 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public String userLogoff() {
-
+        //Step 1: Token des Users löschen
+        //Step 2: Ausgabe Log off war erfolgreich
         return "Log off was succesfull";
     }
 
@@ -69,7 +73,9 @@ public class MappingController {
     )
     @ResponseStatus(HttpStatus.OK)
     public SendBackToken registerUser() {
-
+            //Step 1: Token kreieren
+            //Step 2: fetch data from Userregistrierung in die DB
+            //Step 3: Token an User ausgeben mit validInSeconds
         return new SendBackToken("uavoiggpvagiv", 360);
     }
 
@@ -82,7 +88,9 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public UserImpl getUserData() {
-
+        //Step 1: Check Token to the requested Data
+        //Step 2: fetch data from DB
+        //Step 3: Ausgabe der Daten des Users
         return new UserImpl("tester", "");
     }
 
@@ -95,7 +103,8 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public String deleteUser() {
-
+        //Step 1: Check Token
+        //Step 2: delete data in the DB from table users
         return "User got deleted with the follwing name: Test";
     }
 
@@ -108,7 +117,9 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public String getAllUsers() {
-
+            //Step 1: Check admin Rechte
+            //Step 2: fetch data from DB
+            //Step 3: Ausgabe einer Liste mit den Usern und ihren Daten
         return "Hallo, Test";
     }
     /*
@@ -121,7 +132,8 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public String getShoppinglist() {
-
+        //Step 1: Check Token
+        //Step 2: fetch shoppingList from DB
         return "hier die Shoppinglist";
     }
 
@@ -134,7 +146,10 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public String addIngredient() {
-
+        //Step 1: Check Token
+        //Step 2: fetch shopping List von DB
+        //Step 3: Add Ingredient zu der Shopping List
+        //Step 4: send back shoppingList zu DB
         return "Ingredient got added to the shopping List";
     }
 
@@ -147,7 +162,9 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public String deleteShoppinglist() {
-
+        //Step 1: Check Token +
+        //Step 2: delete shopping List in der DB
+        //Step 3: Ausgabe über Erfolg oder Miserfolg der Aktion
         return "shoppingList got deleted";
     }
 
