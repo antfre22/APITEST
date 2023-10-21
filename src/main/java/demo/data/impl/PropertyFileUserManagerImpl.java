@@ -62,7 +62,7 @@ public class PropertyFileUserManagerImpl implements UserManager {
 
         int i = 1;
         try {
-            properties.load(new FileInputStream("/src/main/resources/users.properties"));
+            properties.load(new FileInputStream("src/main/resources/users.properties"));
             while (properties.containsKey("user." + i + ".name")) {
                 userData.add(
                         new UserImpl(
