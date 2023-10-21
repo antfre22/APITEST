@@ -53,31 +53,37 @@ public class PropertyFileUserManagerImpl implements UserManager {
 
 
     public List<User> readAllUsers() {
+
+        final Logger readTaskLogger = Logger.getLogger("ReadTaskLogger");
+        readTaskLogger.log(Level.INFO, "Start reading ");
+
+        List<User> userData = new ArrayList<>();
         Properties properties = new Properties();
+
+        int i = 1;
         try {
-            // Lese die Property-Datei
-            FileInputStream input = new FileInputStream("/src/main/resources/users.properties");
-            properties.load(input);
-
-            // Daten aus der Property-Datei auslesen
-            String username = properties.getProperty("firstName");
-            //String lastname = properties.getProperty("lastName");
-            String password = properties.getProperty("password");
-            String email = properties.getProperty("email");
-            String token = properties.getProperty("token");
-
-            System.out.println("Token: " + token );
-            System.out.println("Name: " + username);
-            System.out.println("Passwort: " + password);
-            System.out.println("Email: " + email);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            properties.load(new FileInputStream(userPropertyFile));
+            while (properties.containsKey("user." + i + ".name")) {
+                userData.add(
+                        new UserImpl(
+                                properties.getProperty("user." + i + ".firstName"),
+                                properties.getProperty("user." + i + ".email"),
+                                properties.getProperty("user." + i + ".token"),
+                                properties.getProperty("user." + i + ".lastName"),
+                                properties.getProperty("user." + i + ".password")
+                        )
+                );
+                i++;
+            }
         }
+        catch(IOException e){
+                e.printStackTrace();
+            }
 
+            return userData;
 
-
-        return null;
     }
+
 
     @Override
     public User logUserIn(String email, String password) {
