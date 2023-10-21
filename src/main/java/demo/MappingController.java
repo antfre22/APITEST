@@ -92,7 +92,7 @@ public class MappingController {
 
     @GetMapping("/user")
 
-    public String getUserData(@RequestParam String token){
+    public String getUserData(@RequestParam(value = "token", defaultValue = "no-token") String token){
         //Step 1: Check Token to the requested Data
         String email = userManager.getEmailForToken(token);
         //Step 2: fetch data from DB
