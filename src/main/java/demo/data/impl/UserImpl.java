@@ -2,11 +2,16 @@ package demo.data.impl;
 
 import demo.data.api.User;
 public class UserImpl implements User{
-    String name;
+    String lastName;
+    String firstName;
     String password;
-    public UserImpl(String name, String password){
-      this.name = name;
+
+    String email;
+    public UserImpl(String firstName,String lastName, String password, String email){
+      this.firstName = firstName;
+      this.lastName = lastName;
       this.password = password;
+      this.email = email;
     }
 
     @Override

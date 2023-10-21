@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,8 @@ public class MappingController {
     //sehr wichtig, nach API First Prinzip hier vorzugehen
     //Testen der HTTP:Resquest mit Prestige.dev und den passenden URL und HTTP-Aufrufe
     //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
-    UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
+    //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
+    UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("src/main/resources/users.properties");
     //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
 
@@ -83,15 +85,22 @@ public class MappingController {
      GET-Methode, die es ermöglicht das der User
      seine Daten zurückbekommt
      */
+
+    //Request-Param einzelne Parameter JSON
+
+    //Request-Body - alles
+
     @GetMapping(
             path = ("/user"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public UserImpl getUserData() {
+    public String getUserData(@RequestParam String token){
         //Step 1: Check Token to the requested Data
+        String email = userManager.getEmailForToken(token);
         //Step 2: fetch data from DB
+
         //Step 3: Ausgabe der Daten des Users
-        return new UserImpl("tester", "");
+        return email;
     }
 
     /*
