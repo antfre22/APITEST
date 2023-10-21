@@ -90,11 +90,8 @@ public class MappingController {
 
     //Request-Body - alles
 
-    @GetMapping(
-            path = ("/user"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-    )
+    @GetMapping("/user")
+
     public String getUserData(){
         //Step 1: Check Token to the requested Data
         String email = userManager.getEmailForToken("12345");
