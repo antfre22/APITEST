@@ -40,7 +40,7 @@ public class MappingController {
 
     /*
      Post-Methode
-      für den Login eines Users in das System
+      fuer den Login eines Users in das System
      */
     @PostMapping(
             path = ("/auth/login"),
@@ -66,7 +66,7 @@ public class MappingController {
     }
 
     /*
-     POST-Methode, die es ermöglicht das der User sich
+     POST-Methode, die es ermoeglicht das der User sich
      einmalig im System registrieren kann
      */
     @PostMapping(
@@ -102,8 +102,8 @@ public class MappingController {
     }
 
     /*
- DELETE-Methode, die es ermöglicht das
- der Nutzer seinen Account löschen kann
+ DELETE-Methode, die es ermoeglicht das
+ der Nutzer seinen Account loeschen kann
  */
     @DeleteMapping(
             path = ("/user"),

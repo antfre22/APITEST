@@ -61,10 +61,13 @@ public class PropertyFileUserManagerImpl implements UserManager {
 
             // Daten aus der Property-Datei auslesen
             String username = properties.getProperty("firstName");
+            //String lastname = properties.getProperty("lastName");
             String password = properties.getProperty("password");
             String email = properties.getProperty("email");
+            String token = properties.getProperty("token");
 
-            System.out.println("Benutzername: " + username);
+            System.out.println("Token: " + token );
+            System.out.println("Name: " + username);
             System.out.println("Passwort: " + password);
             System.out.println("Email: " + email);
         } catch (IOException ex) {
