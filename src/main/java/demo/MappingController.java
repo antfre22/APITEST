@@ -95,9 +95,9 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    public String getUserData(@RequestParam String token){
+    public String getUserData(){
         //Step 1: Check Token to the requested Data
-        String email = userManager.getEmailForToken(token);
+        String email = userManager.getEmailForToken("12345");
         //Step 2: fetch data from DB
 
         //Step 3: Ausgabe der Daten des Users
