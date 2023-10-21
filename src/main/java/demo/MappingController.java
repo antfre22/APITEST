@@ -92,9 +92,9 @@ public class MappingController {
 
     @GetMapping("/user")
 
-    public String getUserData(){
+    public String getUserData(@RequestParam String token){
         //Step 1: Check Token to the requested Data
-        String email = userManager.getEmailForToken("12345");
+        String email = userManager.getEmailForToken(token);
         //Step 2: fetch data from DB
 
         //Step 3: Ausgabe der Daten des Users
