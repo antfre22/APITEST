@@ -92,7 +92,8 @@ public class MappingController {
 
     @GetMapping(
             path = ("/user"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     public String getUserData(@RequestParam String token){
         //Step 1: Check Token to the requested Data
