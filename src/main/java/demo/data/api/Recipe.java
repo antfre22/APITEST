@@ -10,5 +10,5 @@ public interface Recipe {
     String getName();
 
     //Rufe Anzahl der Zutaten auf
-    int getNumberOfIngredients();
+    int getQuantityOfIngredients();
 }

@@ -8,28 +8,32 @@ public class RecipeImpl implements Recipe {
 
     private String name;
 
-    private int NumberOfIngredients;
+    private int QuantityOfIngredients;
 
     public RecipeImpl(String name, int NumberOfIngredients) {
         this.name = name;
-        this.NumberOfIngredients = NumberOfIngredients;
+        this.QuantityOfIngredients = NumberOfIngredients;
     }
 
     @Override
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     @Override
-    public int getNumberOfIngredients() {
-        return NumberOfIngredients;
+    public int getQuantityOfIngredients() {
+
+        return QuantityOfIngredients;
     }
 
-    public void  setNumberOfIngredients(int NumberOfIngredients) {
-        this.NumberOfIngredients = NumberOfIngredients;
+    public void  setQuantityOfIngredients(int NumberOfIngredients) {
+
+        this.QuantityOfIngredients = NumberOfIngredients;
     }
 }
