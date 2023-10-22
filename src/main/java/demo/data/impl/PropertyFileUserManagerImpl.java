@@ -67,10 +67,10 @@ public class PropertyFileUserManagerImpl implements UserManager {
                 userData.add(
                         new UserImpl(
                                 properties.getProperty("user." + i + ".firstName"),
-                                properties.getProperty("user." + i + ".email"),
-                                properties.getProperty("user." + i + ".token"),
                                 properties.getProperty("user." + i + ".lastName"),
-                                properties.getProperty("user." + i + ".password")
+                                properties.getProperty("user." + i + ".password"),
+                                properties.getProperty("user." + i + ".email"),
+                                properties.getProperty("user." + i + ".token")
                         )
                 );
                 i++;
