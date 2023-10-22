@@ -23,7 +23,7 @@ public class MappingController {
     //Testen der HTTP:Resquest mit Prestige.dev und den passenden URL und HTTP-Aufrufe
     //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
     //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
-    UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("src/main/resources/users.properties");
+    UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("/src/main/resources/users.properties");
     //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
 
