@@ -57,7 +57,7 @@ public class UserImpl implements User{
 
     @Override
     public String getToken() {
-        return null;
+        return token;
     }
 
     @Override
