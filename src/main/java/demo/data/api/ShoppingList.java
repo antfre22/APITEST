@@ -2,9 +2,9 @@ package demo.data.api;
 
 public interface ShoppingList {
    // eine Zutat zur ShoppingList adden
-    String addIngredient();
+    String addIngredient(Ingredients ingredient);
     // eine Zutat von der ShoppingList deleten
-    String deleteIngredient();
+    String deleteIngredient(Ingredients ingredient);
     // ShoppingList bearbeiten (explizit Zutaten)
-    String editIngredients();
+    String editIngredients(Ingredients ingredient);
 }
