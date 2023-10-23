@@ -22,6 +22,6 @@ public interface User {
     String setEmail();
 
     String getToken();
-    //Wie lange Token gültig?
+    //Wie lange Token gueltig?
     long getValidUntil();
 }

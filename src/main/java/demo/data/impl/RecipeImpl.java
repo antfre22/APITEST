@@ -2,38 +2,23 @@ package demo.data.impl;
 
 //Implementierungsklasse der Rezepte
 
+import demo.data.api.Ingredients;
 import demo.data.api.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeImpl implements Recipe {
 
-    private String name;
+    List<Ingredients> ingredientsList = new ArrayList<>();
 
-    private int QuantityOfIngredients;
-
-    public RecipeImpl(String name, int NumberOfIngredients) {
-        this.name = name;
-        this.QuantityOfIngredients = NumberOfIngredients;
+    public RecipeImpl(List<Ingredients> ingredientList) {
+        this.ingredientsList = ingredientList;
     }
 
     @Override
-    public String getName() {
-
-        return name;
+    public List<Ingredients> getIngredients() {
+        return ingredientsList;
     }
 
-    public void setName(String name) {
-
-        this.name = name;
-    }
-
-    @Override
-    public int getQuantityOfIngredients() {
-
-        return QuantityOfIngredients;
-    }
-
-    public void  setQuantityOfIngredients(int NumberOfIngredients) {
-
-        this.QuantityOfIngredients = NumberOfIngredients;
-    }
 }
