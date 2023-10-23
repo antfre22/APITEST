@@ -18,12 +18,13 @@ public class ShoppingListImpl implements ShoppingList {
 
     @Override
     public String deleteIngredient(Ingredients ingredient) {
-
+        //To-do: Iterator schreiben zum durchiterieren der Liste
         return ingredient + " got deleted.";
     }
 
     @Override
     public String editIngredients(Ingredients ingredient) {
+        //To-do: edit Name and Quantity of Ingredients , not so important
         return null;
     }
 }
