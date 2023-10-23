@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,8 @@ public class MappingController {
     //sehr wichtig, nach API First Prinzip hier vorzugehen
     //Testen der HTTP:Resquest mit Prestige.dev und den passenden URL und HTTP-Aufrufe
     //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
-    UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
+    //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
+    UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("/src/main/resources/users.properties");
     //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
 
@@ -38,7 +40,7 @@ public class MappingController {
 
     /*
      Post-Methode
-      für den Login eines Users in das System
+      fuer den Login eines Users in das System
      */
     @PostMapping(
             path = ("/auth/login"),
@@ -64,7 +66,7 @@ public class MappingController {
     }
 
     /*
-     POST-Methode, die es ermöglicht das der User sich
+     POST-Methode, die es ermoeglicht das der User sich
      einmalig im System registrieren kann
      */
     @PostMapping(
@@ -83,20 +85,25 @@ public class MappingController {
      GET-Methode, die es ermöglicht das der User
      seine Daten zurückbekommt
      */
-    @GetMapping(
-            path = ("/user"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-    )
-    public UserImpl getUserData() {
+
+    //Request-Param einzelne Parameter JSON
+
+    //Request-Body - alles
+
+    @GetMapping("/user")
+
+    public String getUserData(@RequestParam(value = "token", defaultValue = "no-token") String token){
         //Step 1: Check Token to the requested Data
+        String email = userManager.getEmailForToken(token);
         //Step 2: fetch data from DB
+
         //Step 3: Ausgabe der Daten des Users
-        return new UserImpl("tester", "");
+        return email;
     }
 
     /*
- DELETE-Methode, die es ermöglicht das
- der Nutzer seinen Account löschen kann
+ DELETE-Methode, die es ermoeglicht das
+ der Nutzer seinen Account loeschen kann
  */
     @DeleteMapping(
             path = ("/user"),

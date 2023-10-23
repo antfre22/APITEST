@@ -4,11 +4,11 @@ package demo.data.api;
 //Soll Name und Zutaten aufrufen
 //Muss noch mehr aufgerufen werden
 
+import java.util.List;
+
 public interface Recipe {
 
-    //Rufe Name auf
-    String getName();
+    List<Ingredients> getIngredients();
 
-    //Rufe Anzahl der Zutaten auf
-    int getQuantityOfIngredients();
+
 }

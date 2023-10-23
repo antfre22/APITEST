@@ -77,15 +77,15 @@ public class PostgresDBUserManagerImpl implements UserManager {
         return myList;
     }
     public User createUser(String firstName, String lastName, String userPassword, String email){
-        UserImpl user = new UserImpl("Hallo","Test");
+        UserImpl user = new UserImpl("Hallo","Test", "ganzstark", "", "");
         return user;
     }
     public User logUserIn(String email, String password){
-        UserImpl user = new UserImpl("Hallo","Test");
+        UserImpl user = new UserImpl("Hallo","Test","ganzstark", "","");
         return user;
     }
     public User logUserOff(String email, String token){
-        UserImpl user = new UserImpl("Hallo","Test");
+        UserImpl user = new UserImpl("Hallo","Test", "ganzstark", "", "");
         return user;
     }
     public String getEmailForToken(String token){
