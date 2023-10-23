@@ -50,7 +50,7 @@ public class PostgresDBListManagerImpl implements ListManager {
 
     }
 
-    @Override
+
     public void createListTable() {
         Statement stmt = null;
         Connection connection = null;

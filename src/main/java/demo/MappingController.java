@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static demo.data.api.ListManager.createListTable;
+
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -196,7 +198,7 @@ public class MappingController {
 
         // Check token
 
-        ListManager.createListTable();
+        createListTable();
 
         return "ok";
     }
