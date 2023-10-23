@@ -65,7 +65,7 @@ public class PostgresDBListManagerImpl implements ListManager {
             String createTable = "CREATE TABLE shoppingList (" +
                     "shopListId SERIAL PRIMARY KEY, " +
                     "ingredients varchar(100) NOT NULL, " +
-                    "quantity double NOT NULL)";
+                    "quantity float NOT NULL)";
 
             stmt.executeUpdate(createTable);
 
