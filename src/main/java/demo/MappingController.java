@@ -1,15 +1,16 @@
 package demo;
 
-import demo.data.api.*;
-import demo.data.impl.*;
 
+import demo.data.api.ListManager;
+import demo.data.api.User;
+import demo.data.api.UserManager;
+import demo.data.impl.PostgresDBListManagerImpl;
+import demo.data.impl.PropertyFileUserManagerImpl;
 import demo.model.SendBackToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import demo.data.api.ListManager;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -195,7 +196,7 @@ public class MappingController {
 
         // Check token
 
-        listManager.createListTable();
+        ListManager.createListTable();
 
         return "ok";
     }
