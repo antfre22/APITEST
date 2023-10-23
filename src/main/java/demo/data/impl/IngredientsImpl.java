@@ -5,9 +5,9 @@ import demo.data.api.Ingredients;
 public class IngredientsImpl implements Ingredients {
 
     String name;
-    int quantity;
+    float quantity;
 
-    public IngredientsImpl(String name, int quantity) {
+    public IngredientsImpl(String name, float quantity) {
         this.name = name;
         this.quantity = quantity;
     }
@@ -22,12 +22,12 @@ public class IngredientsImpl implements Ingredients {
     }
 
 
-    public int getQuantity(){
+    public float getQuantity(){
         return quantity;
     }
 
     @Override
-    public void setQuantity(int quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 

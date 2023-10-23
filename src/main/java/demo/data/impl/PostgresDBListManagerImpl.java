@@ -42,7 +42,38 @@ public class PostgresDBListManagerImpl implements ListManager {
 
     @Override
     public List<Ingredients> readAllIngredients() {
-        return null;
+        final Logger readTaskLogger = Logger.getLogger("ReadListLogger");
+        readTaskLogger.log(Level.INFO,"Start reading shoppingList ");
+
+        List<Ingredients> ingredients = new ArrayList<>();
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM shoppingList");
+
+            while (rs.next()) {
+                ingredients.add(
+                        new IngredientsImpl(
+                                rs.getString("ingredient"),
+                                rs.getFloat("quantity")
+                        )
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ingredients;
     }
 
     @Override
