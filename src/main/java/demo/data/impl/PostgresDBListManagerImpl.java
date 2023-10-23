@@ -34,11 +34,12 @@ public class PostgresDBListManagerImpl implements ListManager {
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
     }
-    public static PostgresDBListManagerImpl getPostgresDBListManagerImpl() {
+    public static PostgresDBListManagerImpl getPostgresDBUserManagerImpl() {
         if (postgresDBListManager == null)
             postgresDBListManager = new PostgresDBListManagerImpl();
         return postgresDBListManager;
     }
+
     @Override
     public List<Ingredients> readAllIngredients() {
         return null;
