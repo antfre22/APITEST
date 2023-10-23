@@ -1,9 +1,7 @@
 package demo;
 
 
-import demo.data.api.ListManager;
-import demo.data.api.User;
-import demo.data.api.UserManager;
+import demo.data.api.*;
 import demo.data.impl.PostgresDBListManagerImpl;
 import demo.data.impl.PropertyFileUserManagerImpl;
 import demo.model.SendBackToken;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static demo.data.api.ListManager.createListTable;
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -27,7 +24,7 @@ public class MappingController {
     //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
     //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
     UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("src/main/resources/users.properties");
-    ListManager listManager = PostgresDBListManagerImpl.getPostgresDBUserManagerImpl();
+    ListManager listManager = PostgresDBListManagerImpl.getPostgresDBListManagerImpl();
     //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
 
@@ -198,7 +195,7 @@ public class MappingController {
 
         // Check token
 
-        createListTable();
+        listManager.createListTable();
 
         return "ok";
     }

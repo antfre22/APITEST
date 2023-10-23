@@ -34,7 +34,7 @@ public class PostgresDBListManagerImpl implements ListManager {
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
     }
-    public static PostgresDBListManagerImpl getPostgresDBUserManagerImpl() {
+    public static PostgresDBListManagerImpl getPostgresDBListManagerImpl() {
         if (postgresDBListManager == null)
             postgresDBListManager = new PostgresDBListManagerImpl();
         return postgresDBListManager;

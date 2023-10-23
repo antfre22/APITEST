@@ -5,5 +5,5 @@ import java.util.List;
 public interface ListManager {
     List<Ingredients> readAllIngredients();
     void addIngredients(Ingredients ingredients);
-    static void createListTable();
+     void createListTable();
 }
