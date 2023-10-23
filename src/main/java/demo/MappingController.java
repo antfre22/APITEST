@@ -7,7 +7,7 @@ import demo.model.SendBackToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import demo.data.api.ListManager;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -24,6 +24,7 @@ public class MappingController {
     //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
     //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
     UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("/src/main/resources/users.properties");
+    ListManager listManager = PostgresDBListManagerImpl.getPostgresDBUserManagerImpl();
     //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
 
@@ -141,6 +142,7 @@ public class MappingController {
     public String getShoppinglist() {
         //Step 1: Check Token
         //Step 2: fetch shoppingList from DB
+        //Step 3: Ausgabe analog Hartwig Tasks
         return "hier die Shoppinglist";
     }
 
@@ -153,7 +155,9 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public String addIngredient() {
+        //analog zu addATask von Hartwig
         //Step 1: Check Token
+
         //Step 2: fetch shopping List von DB
         //Step 3: Add Ingredient zu der Shopping List
         //Step 4: send back shoppingList zu DB
@@ -169,10 +173,31 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public String deleteShoppinglist() {
-        //Step 1: Check Token +
+        //Step 1: Check Token
+
         //Step 2: delete shopping List in der DB
-        //Step 3: Ausgabe über Erfolg oder Miserfolg der Aktion
         return "shoppingList got deleted";
+    }
+    @DeleteMapping(
+            path = ("/shoppinglist/ingredient"),
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
+    )
+    public String deleteIngredient() {
+        //Step 1: Check Token
+
+        //Step 2: delete specific ingredient from shopping List in der DB
+        return "shoppingList got deleted";
+    }
+    @GetMapping("/create-list-table")
+    public String createDBTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+        Logger.getLogger("MappingController")
+                .log(Level.INFO,"MappingController create-list-table " + token);
+
+        // Check token
+
+        listManager.createListTable();
+
+        return "ok";
     }
 
 
