@@ -151,7 +151,7 @@ public class MappingController {
       //      });
         //Step 3: Ausgabe analog Hartwig Tasks
      //   return new IngredientList(IngredientsList);
-        return "OK";
+        return "Ok";
     }
 
     /*
