@@ -2,6 +2,7 @@ package demo;
 
 
 import demo.data.api.*;
+import demo.data.impl.IngredientsImpl;
 import demo.data.impl.PostgresDBListManagerImpl;
 import demo.data.impl.PropertyFileUserManagerImpl;
 import demo.model.IngredientList;
@@ -9,7 +10,7 @@ import demo.model.SendBackToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import demo.model.Ingredients;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -137,21 +138,9 @@ public class MappingController {
     GET-Methode, die dem Nutzer ermöglicht seine aktuelle
     Einkaufsliste angezeigt zu bekommen
      */
+    public String getShoppingList() {
 
-    public String getShoppingList(@RequestParam(value = "sortOrder", defaultValue = "date") String sortOrder,
-                                @RequestParam(value = "token", defaultValue = "no-token") String token) {
-        Logger.getLogger("MappingController")
-                .log(Level.INFO,"MappingController /tasks/all " + sortOrder);
-        //Step 1: Check Token
-        //Step 2: fetch shoppingList from DB
-    //    List<demo.data.api.Ingredients> IngredientsFromFile = ListManager.readAllIngredients();
-        List<Ingredients> IngredientsList = new ArrayList<>();
-     //   for (demo.data.api.Ingredients t : IngredientsFromFile)
-        //    IngredientsList.add(new Ingredients(t.getName(), t.getQuantity()) {
-      //      });
-        //Step 3: Ausgabe analog Hartwig Tasks
-     //   return new IngredientList(IngredientsList);
-        return "Ok";
+        return "OK";
     }
 
     /*

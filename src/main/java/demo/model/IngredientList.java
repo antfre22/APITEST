@@ -22,7 +22,7 @@ public class IngredientList {
         this.Ingredient = Ingr;
     }
 
-    public Collection<Ingredients> getTasks() {
+    public Collection<Ingredients> getIngredients() {
         return Ingredient;
     }
 
