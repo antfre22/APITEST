@@ -138,7 +138,7 @@ public class MappingController {
     Einkaufsliste angezeigt zu bekommen
      */
 
-    public IngredientList getShoppingList(@RequestParam(value = "sortOrder", defaultValue = "date") String sortOrder,
+    public String getShoppingList(@RequestParam(value = "sortOrder", defaultValue = "date") String sortOrder,
                                 @RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController /tasks/all " + sortOrder);
@@ -151,7 +151,7 @@ public class MappingController {
       //      });
         //Step 3: Ausgabe analog Hartwig Tasks
      //   return new IngredientList(IngredientsList);
-        return new IngredientList();
+        return "OK";
     }
 
     /*
