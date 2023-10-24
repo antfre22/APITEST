@@ -40,6 +40,7 @@ public class PostgresDBListManagerImpl implements ListManager {
         return postgresDBListManager;
     }
 
+
     @Override
     public List<Ingredients> readAllIngredients() {
         final Logger readTaskLogger = Logger.getLogger("ReadListLogger");
@@ -80,7 +81,6 @@ public class PostgresDBListManagerImpl implements ListManager {
     public void addIngredients(Ingredients ingredients) {
 
     }
-
 
     public void createListTable() {
         Statement stmt = null;
