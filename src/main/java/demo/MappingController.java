@@ -155,6 +155,7 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public String addIngredient() {
+
         //analog zu addATask von Hartwig
         //Step 1: Check Token
 
