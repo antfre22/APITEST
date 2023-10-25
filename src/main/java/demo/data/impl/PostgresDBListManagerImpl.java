@@ -78,10 +78,10 @@ public class PostgresDBListManagerImpl implements ListManager {
     }
 
     @Override
-    public void addIngredients(String name, float quantity) {
+    public void addIngredients(String ingredients, float quantity) {
 
         final Logger createTaskLogger = Logger.getLogger("CreateTaskLogger");
-        createTaskLogger.log(Level.INFO,"Start creating task " + name);
+        createTaskLogger.log(Level.INFO,"Start creating task " + ingredients);
 
         Statement stmt = null;
         Connection connection = null;
@@ -89,8 +89,8 @@ public class PostgresDBListManagerImpl implements ListManager {
         try {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
-            String udapteSQL = "INSERT into shoppingList (name, quantity) VALUES (" +
-                    "'" + name + "', " +
+            String udapteSQL = "INSERT into shoppingList (ingredients, quantity) VALUES (" +
+                    "'" + ingredients + "', " +
                     quantity + ")";
 
             stmt.executeUpdate(udapteSQL);
