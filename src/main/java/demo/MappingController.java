@@ -141,7 +141,8 @@ public class MappingController {
      */
 
    @GetMapping(path = ("/shoppinglist"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE})
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+
     public ShoppingList getShoppingList() {
 
         Logger.getLogger("MappingController")
