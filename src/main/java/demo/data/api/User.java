@@ -1,7 +1,7 @@
 package demo.data.api;
 
 //Interface zum Speichern der User-Daten
-//Übernommen von Hartiwg
+//Uebernommen vom Hartiwg
 
 public interface User {
 

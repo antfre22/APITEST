@@ -3,15 +3,16 @@ package demo;
 
 import demo.data.api.*;
 import demo.data.api.ListManager;
-import demo.data.impl.IngredientsImpl;
 import demo.data.impl.PostgresDBListManagerImpl;
 import demo.data.impl.PropertyFileUserManagerImpl;
-import demo.model.IngredientList;
+import demo.model.ShoppingList;
 import demo.model.SendBackToken;
+import demo.model.TokenShoppingList;
+import demo.model.Ingredients;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import demo.model.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -140,39 +141,42 @@ public class MappingController {
     Einkaufsliste angezeigt zu bekommen
      */
 
-//    @GetMapping(path = ("/shoppinglist"),
-//            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE})
-//    public IngredientList getShoppingList() {
-//
-////        Logger.getLogger("MappingController")
-////                .log(Level.INFO,"MappingController /ingredients/all ");
-////        //Step 1: Check Token
-////        //Step 2: fetch shoppingList from DB
-////        List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
-////        List<demo.model.Ingredients> myIngredients = new ArrayList<>();
-////        for (demo.data.api.Ingredients t : ingredientsFromFile)
-////            myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
-////        // Step 3: Ausgabe analog Hartwig Tasks
-////        return new IngredientList(myIngredients);
-//    }
-// List<demo.data.api.Ingredients> ingredientsFromFile = ListManager.readAllIngredients();
+   @GetMapping(path = ("/shoppinglist"),
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ShoppingList getShoppingList() {
+
+        Logger.getLogger("MappingController")
+                .log(Level.INFO,"MappingController /ingredients/all ");
+        //Step 1: Check Token
+        //Step 2: fetch shoppingList from DB
+      List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
+       List<demo.model.Ingredients> myIngredients = new ArrayList<>();
+       for (demo.data.api.Ingredients t : ingredientsFromFile)
+           myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
+        // Step 3: Ausgabe analog Hartwig Tasks
+       return new ShoppingList(myIngredients);
+    }
+
     /*
-    Put-Methode, die dem Nutzer ermöglicht seine
+    Post-Methode, die dem Nutzer ermöglicht seine
     Einkaufsliste mit Zutaten zu füllen
      */
-    @PutMapping(
+    @PostMapping(
             path = ("/shoppinglist"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    public String addIngredient() {
+    public String addIngredient(@RequestBody TokenShoppingList tokenShoppingList) {
 
+        Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /tasks "
+                + tokenShoppingList.getShoppingList().getName());
         //analog zu addATask von Hartwig
         //Step 1: Check Token
 
         //Step 2: fetch shopping List von DB
         //Step 3: Add Ingredient zu der Shopping List
+      //  listManager.addIngredients(tokenShoppingList.getShoppingList().getIngredients().());
         //Step 4: send back shoppingList zu DB
-        return "Ingredient got added to the shopping List";
+        return "Ingredient got added to the shopping List" + tokenShoppingList.getShoppingList().getIngredients();
     }
 
     /*

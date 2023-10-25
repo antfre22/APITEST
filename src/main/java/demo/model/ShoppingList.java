@@ -3,32 +3,39 @@ package demo.model;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import demo.data.api.Ingredients;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IngredientList {
+public class ShoppingList {
 
-    private Collection<Ingredients> Ingredient;
+    private Collection<demo.model.Ingredients> Ingredient;
+    private String name;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public IngredientList() { }
+    public ShoppingList() { }
 
-    public IngredientList(Collection<Ingredients> Ingr) {
+    public ShoppingList(Collection<demo.model.Ingredients> Ingr) {
         this.Ingredient = Ingr;
     }
 
-    public Collection<Ingredients> getIngredients() {
+    public Collection<demo.model.Ingredients> getIngredients() {
         return Ingredient;
     }
 
     public void setIngredients(Collection<Ingredients> Ingr) {
         this.Ingredient = Ingr;
     }
+
+    public String getName() {
+        return name;
+    }
+
+
+
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
