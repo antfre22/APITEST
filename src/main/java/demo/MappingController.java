@@ -140,10 +140,8 @@ public class MappingController {
     Einkaufsliste angezeigt zu bekommen
      */
 
-   @GetMapping(path = ("/shoppinglist"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-
-    public ShoppingList getShoppingList() {
+   @GetMapping("/shoppinglist")
+    public ShoppingList getShoppingList(@RequestParam(value = "token", defaultValue = "no-token") String token) {
 
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController /ingredients/all ");
