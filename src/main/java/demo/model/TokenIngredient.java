@@ -7,19 +7,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TokenShoppingList {
+public class TokenIngredient {
 
     private String token;
-    private demo.model.ShoppingList shoppingList;
+    private Ingredients ingredients;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public TokenShoppingList() {
+    public TokenIngredient() {
     }
 
-    public TokenShoppingList(demo.model.ShoppingList shoppingList, String token) {
-        this.shoppingList = shoppingList;
+    public TokenIngredient(Ingredients ingredients, String token) {
+        this.ingredients = ingredients;
         this.token = token;
     }
 
@@ -31,12 +31,12 @@ public class TokenShoppingList {
         this.token = token;
     }
 
-    public demo.model.ShoppingList getShoppingList() {
-        return shoppingList;
+    public Ingredients getIngredients() {
+        return ingredients;
     }
 
-    public void setShoppingList(demo.model.ShoppingList shoppingList) {
-        this.shoppingList = shoppingList;
+    public void setIngredients(Ingredients ingredients) {
+        this.ingredients = ingredients;
     }
 
     @JsonAnyGetter

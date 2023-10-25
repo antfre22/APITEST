@@ -7,12 +7,11 @@ import demo.data.impl.PostgresDBListManagerImpl;
 import demo.data.impl.PropertyFileUserManagerImpl;
 import demo.model.ShoppingList;
 import demo.model.SendBackToken;
-import demo.model.TokenShoppingList;
-import demo.model.Ingredients;
+import demo.model.TokenIngredient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import demo.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -165,18 +164,18 @@ public class MappingController {
             path = ("/shoppinglist"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    public String addIngredient(@RequestBody TokenShoppingList tokenShoppingList) {
+    public String addIngredient(@RequestBody TokenIngredient tokenIngredient) {
 
         Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /tasks "
-                + tokenShoppingList.getShoppingList().getName());
+                + tokenIngredient.getIngredients().getName());
         //analog zu addATask von Hartwig
         //Step 1: Check Token
 
         //Step 2: fetch shopping List von DB
         //Step 3: Add Ingredient zu der Shopping List
-      //  listManager.addIngredients(tokenShoppingList.getShoppingList().getIngredients().());
+        listManager.addIngredients(tokenIngredient.getIngredients().getName(), tokenIngredient.getIngredients().getQuantity());
         //Step 4: send back shoppingList zu DB
-        return "Ingredient got added to the shopping List" + tokenShoppingList.getShoppingList().getIngredients();
+        return "You added: " + tokenIngredient.getIngredients().getName() + " to your List! ";
     }
 
     /*

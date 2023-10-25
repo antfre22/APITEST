@@ -78,8 +78,34 @@ public class PostgresDBListManagerImpl implements ListManager {
     }
 
     @Override
-    public void addIngredients(Ingredients ingredients) {
+    public void addIngredients(String name, float quantity) {
 
+        final Logger createTaskLogger = Logger.getLogger("CreateTaskLogger");
+        createTaskLogger.log(Level.INFO,"Start creating task " + name);
+
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+            String udapteSQL = "INSERT into shoppingList (name, quantity) VALUES (" +
+                    "'" + name + "', " +
+                    quantity + ")";
+
+            stmt.executeUpdate(udapteSQL);
+
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createListTable() {
