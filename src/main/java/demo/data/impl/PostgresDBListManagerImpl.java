@@ -58,7 +58,7 @@ public class PostgresDBListManagerImpl implements ListManager {
             while (rs.next()) {
                 ingredients.add(
                         new IngredientsImpl(
-                                rs.getString("ingredient"),
+                                rs.getString("ingredients"),
                                 rs.getFloat("quantity")
                         )
                 );
