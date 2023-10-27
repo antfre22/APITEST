@@ -148,7 +148,7 @@ public class PostgresDBListManagerImpl implements ListManager {
             stmt = connection.createStatement();
 
 
-            String deleteSQL = "DELETE FROM shoppingList WHERE ingredients= " + name;
+            String deleteSQL = "DELETE FROM shoppingList WHERE ingredients = " + name;
 
             stmt.executeUpdate(deleteSQL);
 
