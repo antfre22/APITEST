@@ -150,7 +150,7 @@ public class PostgresDBListManagerImpl implements ListManager {
             // String dropTable = "DROP TABLE tasks";
             // stmt.executeUpdate(dropTable);
 
-            String deleteSQL = "DELETE from shoppinglist where ingredients =" + name;
+            String deleteSQL = "DELETE from shoppingList where" + "ingredients"+ "=" + name;
 
             stmt.executeUpdate(deleteSQL);
 
