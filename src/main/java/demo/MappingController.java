@@ -161,7 +161,7 @@ public class MappingController {
      */
     @PostMapping(
             path = ("/shoppinglist"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public String addIngredient(@RequestBody TokenIngredient tokenIngredient) {
 
