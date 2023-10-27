@@ -195,11 +195,11 @@ public class MappingController {
             path = ("/shoppinglist/ingredient"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    public String deleteIngredient() {
+    public String deleteIngredient(@RequestParam String name) {
         //Step 1: Check Token
-
+        listManager.deleteIngredient(name);
         //Step 2: delete specific ingredient from shopping List in der DB
-        return "shoppingList got deleted";
+        return "We deleted the following ingredient: " + name ;
     }
     @GetMapping("/create-list-table")
     public String createDBTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
