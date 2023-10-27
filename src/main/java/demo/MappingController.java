@@ -191,10 +191,8 @@ public class MappingController {
         //Step 2: delete shopping List in der DB
         return "shoppingList got deleted";
     }
-    @DeleteMapping(
-            path = ("/shoppinglist/ingredient"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE}
-    )
+    @DeleteMapping("/shoppinglist/ingredient")
+
     public String deleteIngredient(@RequestParam String name) {
         //Step 1: Check Token
         listManager.deleteIngredient(name);
