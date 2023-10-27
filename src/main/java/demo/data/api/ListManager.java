@@ -7,5 +7,5 @@ public interface ListManager {
     void addIngredients(String name, float quantity);
      void createListTable();
 
-     void deleteIngredient(String ingredients);
+     void deleteIngredient(int id);
 }
