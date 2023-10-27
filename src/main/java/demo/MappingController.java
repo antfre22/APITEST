@@ -193,11 +193,11 @@ public class MappingController {
     }
     @DeleteMapping("/shoppinglist/ingredient")
 
-    public String deleteIngredient(@RequestParam String name) {
+    public String deleteIngredient(@RequestParam String ingredients) {
         //Step 1: Check Token
-        listManager.deleteIngredient(name);
+        listManager.deleteIngredient(ingredients);
         //Step 2: delete specific ingredient from shopping List in der DB
-        return "We deleted the following ingredient: " + name ;
+        return "We deleted the following ingredient: " +  ingredients ;
     }
     @GetMapping("/create-list-table")
     public String createDBTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {

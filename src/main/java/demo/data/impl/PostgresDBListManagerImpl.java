@@ -139,7 +139,7 @@ public class PostgresDBListManagerImpl implements ListManager {
     }
 
     @Override
-    public void deleteIngredient(String name) {
+    public void deleteIngredient(String ingredients) {
         Statement stmt = null;
         Connection connection = null;
 
@@ -148,7 +148,7 @@ public class PostgresDBListManagerImpl implements ListManager {
             stmt = connection.createStatement();
 
 
-            String deleteSQL = "DELETE FROM shoppingList WHERE ingredients = " + name;
+            String deleteSQL = "DELETE FROM shoppingList WHERE Ingredients = " + ingredients;
 
             stmt.executeUpdate(deleteSQL);
 
