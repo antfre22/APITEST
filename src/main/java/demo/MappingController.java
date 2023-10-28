@@ -214,7 +214,7 @@ public class MappingController {
 
 
     @GetMapping("/create-user-table")
-    public String createUserTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+    public String createUserTable(@RequestParam(value = "token", defaultValue = "an dem liegts") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController create-user-table " + token);
 
