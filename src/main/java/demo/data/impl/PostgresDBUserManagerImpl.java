@@ -55,7 +55,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
                     "password varchar(100) NOT NULL, " +
                     "email varchar(100) NOT NULL, " +
                     "token varchar(100) NOT NULL, " +
-                    "validuntil int NOT NULL)";
+                    "validuntil float NOT NULL)";
 
 
             stmt.executeUpdate(createUserTable);
