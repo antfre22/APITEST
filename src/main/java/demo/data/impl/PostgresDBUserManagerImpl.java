@@ -48,7 +48,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
 
-            String createTable = "CREATE TABLE users (" +
+            String createUserTable = "CREATE TABLE users (" +
                     "id SERIAL PRIMARY KEY, " +
                     "firstname varchar(100) NOT NULL, " +
                     "lastname varchar(100) NOT NULL, " +
@@ -58,7 +58,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
                     "validuntil int NOT NULL)";
 
 
-            stmt.executeUpdate(createTable);
+            stmt.executeUpdate(createUserTable);
 
         } catch (SQLException e) {
             e.printStackTrace();
