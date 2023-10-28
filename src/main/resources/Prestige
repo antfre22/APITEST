@@ -15,3 +15,5 @@ Content-Type: application/json
    }
 
 }
+
+DELETE https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient?ingredients=test
