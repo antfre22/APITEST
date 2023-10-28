@@ -120,8 +120,8 @@ public class PostgresDBListManagerImpl implements ListManager {
             // stmt.executeUpdate(dropTable);
 
             String createTable = "CREATE TABLE shoppingList (" +
-                    "Ingredients SERIAL PRIMARY KEY " +
                     "Shoplistid int NOT NULL" +
+                    "Ingredients SERIAL PRIMARY KEY " +
                     "quantity float NOT NULL)";
 
             stmt.executeUpdate(createTable);
