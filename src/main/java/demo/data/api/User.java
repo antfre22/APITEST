@@ -23,5 +23,5 @@ public interface User {
 
     String getToken();
     //Wie lange Token gueltig?
-    long getValidUntil();
+    float getValidUntil();
 }

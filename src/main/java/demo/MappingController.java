@@ -4,6 +4,7 @@ package demo;
 import demo.data.api.*;
 import demo.data.api.ListManager;
 import demo.data.impl.PostgresDBListManagerImpl;
+import demo.data.impl.PostgresDBUserManagerImpl;
 import demo.data.impl.PropertyFileUserManagerImpl;
 import demo.model.ShoppingList;
 import demo.model.SendBackToken;
@@ -28,7 +29,7 @@ public class MappingController {
     //Testen der HTTP:Resquest mit Prestige.dev und den passenden URL und HTTP-Aufrufe
     //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
     //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
-    UserManager userManager = PropertyFileUserManagerImpl.getPropertyFileUserManagerImpl("src/main/resources/users.properties");
+    UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
     ListManager listManager = PostgresDBListManagerImpl.getPostgresDBListManagerImpl();
     //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
@@ -212,6 +213,7 @@ public class MappingController {
         return "ok";
     }
 
+    //test1234
 
     @GetMapping("/create-user-table")
     public String createUserTable(@RequestParam(value = "token", defaultValue = "an dem liegts") String token) {
@@ -222,7 +224,7 @@ public class MappingController {
 
         userManager.createUserTable();
 
-        return "UserTable erstellt";
+        return "UserTabelle erstellt";
     }
 
 

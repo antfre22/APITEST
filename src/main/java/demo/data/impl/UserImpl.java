@@ -61,7 +61,7 @@ public class UserImpl implements User{
     }
 
     @Override
-    public long getValidUntil() {
+    public float getValidUntil() {
         return 0;
     }
 }
