@@ -212,6 +212,7 @@ public class MappingController {
         return "ok";
     }
 
+    //test1234
 
     @GetMapping("/create-user-table")
     public String createUserTable(@RequestParam(value = "token", defaultValue = "an dem liegts") String token) {
