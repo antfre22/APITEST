@@ -222,7 +222,7 @@ public class MappingController {
 
         userManager.createUserTable();
 
-        return "ok";
+        return "UserTable erstellt";
     }
 
 
