@@ -147,5 +147,10 @@ public class PropertyFileUserManagerImpl implements UserManager {
                 return u.getEmail();
         return "not found";
     }
+
+    @Override
+    public void createUserTable() {
+
+    }
 }
 

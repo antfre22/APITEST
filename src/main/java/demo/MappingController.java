@@ -11,7 +11,7 @@ import demo.model.TokenIngredient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import demo.data.impl.PropertyFileUserManagerImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -207,6 +207,18 @@ public class MappingController {
         // Check token
 
         listManager.createListTable();
+
+        return "ok";
+    }
+
+    @GetMapping("/create-user-table")
+    public String createUserTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+        Logger.getLogger("MappingController")
+                .log(Level.INFO,"MappingController create-user-table " + token);
+
+        // Check token
+
+        userManager.createUserTable();
 
         return "ok";
     }

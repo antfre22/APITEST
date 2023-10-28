@@ -8,4 +8,6 @@ public interface UserManager {
     User logUserIn(String email, String password);
     User logUserOff(String email, String token);
     String getEmailForToken(String token);
+
+    void createUserTable();
 }
