@@ -199,6 +199,7 @@ public class MappingController {
         //Step 2: delete specific ingredient from shopping List in der DB
         return "We deleted the following ingredient: " +  ingredients ;
     }
+
     @GetMapping("/create-list-table")
     public String createDBTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
@@ -210,6 +211,7 @@ public class MappingController {
 
         return "ok";
     }
+
 
     @GetMapping("/create-user-table")
     public String createUserTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {

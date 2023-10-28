@@ -9,5 +9,5 @@ public interface UserManager {
     User logUserOff(String email, String token);
     String getEmailForToken(String token);
 
-    void createUserTable();
+   void createUserTable();
 }
