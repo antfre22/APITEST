@@ -1,5 +1,6 @@
 package demo.data.impl;
 
+import demo.data.api.Ingredients;
 import demo.data.api.UserManager;
 import demo.data.api.User;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -73,12 +74,73 @@ public class PostgresDBUserManagerImpl implements UserManager {
     }
 
     public List<User> readAllUsers(){
-        List<User> myList = new ArrayList<>();
-        return myList;
+
+        final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
+        readTaskLogger.log(Level.INFO,"Start reading List of Users");
+
+        List<User> myUsers = new ArrayList<>();
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+
+            while (rs.next()) {
+                myUsers.add(
+                        //String firstName,String lastName,
+                        //String password, String email, String token
+                        new UserImpl(
+                                rs.getString("firstname"),
+                                rs.getString("lastname"),
+                                rs.getString("password"),
+                                rs.getString("email"),
+                                rs.getString("token")
+                                 )
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return myUsers;
     }
-    public User createUser(String firstName, String lastName, String userPassword, String email){
-        UserImpl user = new UserImpl("Hallo","Test", "ganzstark", "", "");
-        return user;
+    public String createUser(String firstName, String lastName, String userPassword, String email){
+
+        final Logger createTaskLogger = Logger.getLogger("CreateUserLogger");
+        createTaskLogger.log(Level.INFO,"Start creating user: " + firstName);
+
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+            String udapteSQL = "INSERT into users (firstname, lastname, password, email) VALUES (" +
+                    "'" + firstName + "', " +
+                    "'" + lastName + "', " +
+                    "'" + userPassword + "', " +
+                    "'" + email + "')";
+
+            stmt.executeUpdate(udapteSQL);
+
+            stmt.close();
+            connection.close();
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "Added User with name: " + firstName + " and email:  " + email ;
     }
     public User logUserIn(String email, String password){
         UserImpl user = new UserImpl("Hallo","Test","ganzstark", "","");
