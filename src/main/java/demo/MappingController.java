@@ -3,9 +3,7 @@ package demo;
 
 import demo.data.api.*;
 import demo.data.api.ListManager;
-import demo.data.impl.PostgresDBListManagerImpl;
-import demo.data.impl.PostgresDBUserManagerImpl;
-import demo.data.impl.PropertyFileUserManagerImpl;
+import demo.data.impl.*;
 import demo.model.ShoppingList;
 import demo.model.SendBackToken;
 import demo.model.TokenIngredient;
@@ -14,6 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import demo.data.impl.PropertyFileUserManagerImpl;
+
+import org.apache.commons.dbcp.BasicDataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,13 +60,14 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     @ResponseStatus(HttpStatus.OK)
-    public SendBackToken userLogin(@RequestBody User user) {
+    public String userLogin(@RequestParam String userName, String password) {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
-
+        userManager.Login(userName, password);
         //Step 2: Wie viele Sekunden soll dieser gelten ?
 
-        return new SendBackToken("jhnaosvgioa gvi", 67978);
+      //  return new SendBackToken("jhnaosvgioa gvi", 67978);
+        return "Hat funktioniert";
     }
 
     @DeleteMapping(

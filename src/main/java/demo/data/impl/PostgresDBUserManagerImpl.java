@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
@@ -72,6 +74,44 @@ public class PostgresDBUserManagerImpl implements UserManager {
         }
 
     }
+
+    public String Login(String userName, String password)
+    {
+        final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
+        readTaskLogger.log(Level.INFO,"Start reading List of Users");
+
+
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+           String ds = ("SELECT * FROM users WHERE userName = ? and password = ?");
+            PreparedStatement statement = connection.prepareStatement(ds);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return "Anmeldung erfolgreich!";
+            } else {
+               return "Falscher Benutzername oder Passwort!";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "Hat noch nicht funktioniert";
+    }
+
 
     public List<User> readAllUsers(){
 

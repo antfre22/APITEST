@@ -149,6 +149,11 @@ public class PropertyFileUserManagerImpl implements UserManager {
     }
 
     @Override
+    public String Login(String userName, String password) {
+        return "falsche Methode genommen";
+    }
+
+    @Override
     public void createUserTable() {
 
     }

@@ -8,4 +8,6 @@ public interface ListManager {
      void createListTable();
 
      void deleteIngredient(int ingredient);
+
+
 }
