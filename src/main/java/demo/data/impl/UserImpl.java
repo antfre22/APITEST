@@ -21,7 +21,7 @@ public class UserImpl implements User{
     }
 
     @Override
-    public String setFirstName() {
+    public String setFirstName(String name) {
         return null;
     }
 
@@ -31,7 +31,7 @@ public class UserImpl implements User{
     }
 
     @Override
-    public String setLastName() {
+    public String setLastName(String lastName) {
         return null;
     }
 
@@ -41,7 +41,7 @@ public class UserImpl implements User{
     }
 
     @Override
-    public String setPasswort() {
+    public String setPasswort(String passwort) {
         return null;
     }
 
@@ -51,7 +51,7 @@ public class UserImpl implements User{
     }
 
     @Override
-    public String setEmail() {
+    public String setEmail(String email) {
         return null;
     }
 

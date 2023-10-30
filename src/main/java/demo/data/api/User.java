@@ -7,19 +7,19 @@ public interface User {
 
     String getFirstName();
 
-    String setFirstName();
+    String setFirstName(String firstName);
 
     String getLastName();
 
-    String setLastName();
+    String setLastName(String lastName);
 
     String getPasswort();
 
-    String setPasswort();
+    String setPasswort(String passwort);
 
     String getEmail();
 
-    String setEmail();
+    String setEmail(String email);
 
     String getToken();
     //Wie lange Token gueltig?

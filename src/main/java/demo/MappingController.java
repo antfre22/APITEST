@@ -59,6 +59,7 @@ public class MappingController {
     public SendBackToken userLogin(@RequestBody User user) {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
+
         //Step 2: Wie viele Sekunden soll dieser gelten ?
 
         return new SendBackToken("jhnaosvgioa gvi", 67978);
@@ -123,7 +124,7 @@ public class MappingController {
     public String deleteUser() {
         //Step 1: Check Token
         //Step 2: delete data in the DB from table users
-        return "User got deleted with the follwing name: Test";
+        return "User got deleted with the following name: Test";
     }
 
     /*
@@ -132,6 +133,8 @@ public class MappingController {
  */
     @GetMapping("/user/all")
     public UserList getAllUsers(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+        Logger.getLogger("MappingController")
+                .log(Level.INFO,"MappingController /user/all ");
             //Step 1: Check admin Rechte
             //Step 2: fetch data from DB
         List<User> usersfromDB = userManager.readAllUsers();
