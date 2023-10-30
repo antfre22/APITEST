@@ -120,8 +120,8 @@ public class PostgresDBListManagerImpl implements ListManager {
             // stmt.executeUpdate(dropTable);
 
             String createTable = "CREATE TABLE shoppingList (" +
-                    "Shoplistid int NOT NULL" +
-                    "Ingredients SERIAL PRIMARY KEY " +
+                    "Shoplistid SERIAL PRIMARY KEY" +
+                    "Ingredients varchar(100) NOT NULL " +
                     "quantity float NOT NULL)";
 
             stmt.executeUpdate(createTable);
@@ -141,7 +141,7 @@ public class PostgresDBListManagerImpl implements ListManager {
 //Test
 
     @Override
-    public void deleteIngredient(String ingredient) {
+    public void deleteIngredient(int ingredient) {
         Statement stmt = null;
         Connection connection = null;
 
@@ -150,7 +150,7 @@ public class PostgresDBListManagerImpl implements ListManager {
             stmt = connection.createStatement();
 
 
-            String deleteSQL = "DELETE FROM shoppingList WHERE Ingredients = " + ingredient;
+            String deleteSQL = "DELETE FROM shoppingList WHERE Shoplistid = " + ingredient;
 
             stmt.executeUpdate(deleteSQL);
 

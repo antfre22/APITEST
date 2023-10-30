@@ -194,7 +194,7 @@ public class MappingController {
     }
     @DeleteMapping("/shoppinglist/ingredient")
 
-    public String deleteIngredient(@RequestParam String ingredient) {
+    public String deleteIngredient(@RequestParam int ingredient) {
         //Step 1: Check Token
         listManager.deleteIngredient(ingredient);
         //Step 2: delete specific ingredient from shopping List in der DB
