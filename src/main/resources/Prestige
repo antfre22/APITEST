@@ -22,3 +22,17 @@ GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/create-user-
 DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient?ingredients=6
 
 DELETE https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient?ingredients=test
+###
+
+POST https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/user
+Content-Type: application/json
+
+{
+  "token":"123",
+  "user": {
+    "firstName": "Anton",
+    "lastName": "frenz",
+    "userEmail": "r@r",
+    "userPassword": "fef"
+   }
+}
