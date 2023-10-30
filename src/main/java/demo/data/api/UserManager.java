@@ -9,7 +9,7 @@ public interface UserManager {
     User logUserOff(String email, String token);
     String getEmailForToken(String token);
 
-    String Login (String userName, String password);
+    String Login (String Email, String Password);
 
    void createUserTable();
 }

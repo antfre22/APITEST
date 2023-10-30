@@ -149,7 +149,7 @@ public class PropertyFileUserManagerImpl implements UserManager {
     }
 
     @Override
-    public String Login(String userName, String password) {
+    public String Login(String Email, String Password) {
         return "falsche Methode genommen";
     }
 
@@ -160,4 +160,3 @@ public class PropertyFileUserManagerImpl implements UserManager {
 
 
 }
-

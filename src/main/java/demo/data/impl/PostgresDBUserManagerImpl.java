@@ -75,7 +75,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
     }
 
-    public String Login(String userName, String password)
+    public String Login(String Email, String Password)
     {
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
         readTaskLogger.log(Level.INFO,"Start reading List of Users");
@@ -87,16 +87,16 @@ public class PostgresDBUserManagerImpl implements UserManager {
         try {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
-           String ds = ("SELECT * FROM users WHERE userName = ? and password = ?");
+           String ds = ("SELECT * FROM users WHERE Email = ? and Password = ?");
             PreparedStatement statement = connection.prepareStatement(ds);
-            statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(1, Email);
+            statement.setString(2, Password);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
                 return "Anmeldung erfolgreich!";
             } else {
-               return "Falscher Benutzername oder Passwort!";
+               return "Falsche Email oder Passwort!";
             }
         } catch (SQLException e) {
             e.printStackTrace();

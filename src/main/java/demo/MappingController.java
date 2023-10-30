@@ -60,10 +60,10 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     @ResponseStatus(HttpStatus.OK)
-    public String userLogin(@RequestParam String userName, String password) {
+    public String userLogin(@RequestParam String Email, String Password) {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
-        userManager.Login(userName, password);
+        userManager.Login(Email, Password);
         //Step 2: Wie viele Sekunden soll dieser gelten ?
 
       //  return new SendBackToken("jhnaosvgioa gvi", 67978);
