@@ -9,6 +9,7 @@ import demo.data.impl.PropertyFileUserManagerImpl;
 import demo.model.ShoppingList;
 import demo.model.SendBackToken;
 import demo.model.TokenIngredient;
+import demo.model.UserList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -98,14 +99,14 @@ public class MappingController {
     //Request-Body - alles
 
     @GetMapping("/user")
-
-    public String getUserData(@RequestParam(value = "token", defaultValue = "no-token") String token){
+    public User getUserData(@RequestParam(value = "token", defaultValue = "no-token") String token){
         //Step 1: Check Token to the requested Data
-        String email = userManager.getEmailForToken(token);
         //Step 2: fetch data from DB
+        //noch zu impeln
+        //List<User> myUsers = userManager.readAllUsers();
 
         //Step 3: Ausgabe der Daten des Users
-        return email;
+        return null;
     }
 
     /*
@@ -126,15 +127,18 @@ public class MappingController {
  GET-Methode, die es ermöglicht das der Admin
  alle User mit ihren Daten angezeigt bekommt
  */
-    @GetMapping(
-            path = ("/user/all"),
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-    )
-    public String getAllUsers() {
+    @GetMapping("/user/all")
+    public UserList getAllUsers(@RequestParam(value = "token", defaultValue = "no-token") String token) {
             //Step 1: Check admin Rechte
             //Step 2: fetch data from DB
+        List<User> usersfromDB = userManager.readAllUsers();
+        List<demo.model.User> myUsers = new ArrayList<>();
             //Step 3: Ausgabe einer Liste mit den Usern und ihren Daten
-        return "Hallo, Test";
+        for(User user : usersfromDB) {
+            myUsers.add(new demo.model.User(user.getEmail(),user.getPasswort(),
+                    user.getLastName(), user.getFirstName(), user.getToken()));
+        }
+        return new UserList(myUsers);
     }
     /*
     GET-Methode, die dem Nutzer ermöglicht seine aktuelle

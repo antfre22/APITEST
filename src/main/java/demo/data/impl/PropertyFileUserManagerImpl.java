@@ -27,7 +27,7 @@ public class PropertyFileUserManagerImpl implements UserManager {
 
 
     @Override
-    public User createUser(String firstName, String lastName, String userPassword, String email) {
+    public String createUser(String firstName, String lastName, String userPassword, String email) {
 
         final Logger createUserLogger = Logger.getLogger("CreateUserLogger");
         createUserLogger.log(Level.INFO,"Start creating " + email);
