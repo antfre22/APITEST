@@ -124,11 +124,13 @@ public class PostgresDBUserManagerImpl implements UserManager {
         try {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
-            String udapteSQL = "INSERT into users (firstname, lastname, password, email) VALUES (" +
+            String udapteSQL = "INSERT into users (firstname, lastname, password, email, token, validuntil) VALUES (" +
                     "'" + firstName + "', " +
                     "'" + lastName + "', " +
-                    "'" + userPassword + "', " +
-                    "'" + email + "')";
+                    "'" + password + "', " +
+                    "'" + email + "', " +
+                    "'logged-off', " +
+                    "0)";
 
             stmt.executeUpdate(udapteSQL);
 
