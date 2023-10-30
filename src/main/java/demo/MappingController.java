@@ -145,6 +145,24 @@ public class MappingController {
                     user.getLastName(), user.getFirstName(), user.getToken()));
         }
         return new UserList(myUsers);
+ /*       {
+            "users": [
+            {
+                "userEmail": "fef",
+                    "userPassword": null,
+                    "lastName": null,
+                    "firstName": null,
+                    "token": "logged-off"
+            },
+            {
+                "userEmail": "fefgjngjdjgd",
+                    "userPassword": null,
+                    "lastName": null,
+                    "firstName": null,
+                    "token": "logged-off"
+            }
+  ] Ausgabe muss noch noch richtig gemaxht werden
+        } */
     }
     /*
     GET-Methode, die dem Nutzer ermöglicht seine aktuelle
