@@ -4,43 +4,49 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-public class UserList {
 
-    private Collection<User> users;
+public class TokenUser {
+
+    private String token;
+    private User user;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public UserList() { }
-
-    public UserList(Collection<User> users) {
-
-        this.users = users;
+    public TokenUser() {
     }
 
-    public Collection<User> getUsers() {
-
-        return users;
+    public TokenUser(User user, String token) {
+       this.user = user;
+        this.token = token;
     }
 
+    public String getToken() {
+        return token;
+    }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
-
         return this.additionalProperties;
     }
 
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
-
         this.additionalProperties.put(name, value);
     }
-
 }
+

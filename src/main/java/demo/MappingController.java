@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import demo.model.TokenUser;
 
 
 
@@ -82,11 +83,13 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     @ResponseStatus(HttpStatus.OK)
-    public SendBackToken registerUser() {
+    public String registerUser(@RequestBody TokenUser TokenUser) {
             //Step 1: Token kreieren
             //Step 2: fetch data from Userregistrierung in die DB
+        userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(),TokenUser.getUser().getUserEmail(), TokenUser.getUser().getUserPassword());
             //Step 3: Token an User ausgeben mit validInSeconds
-        return new SendBackToken("uavoiggpvagiv", 360);
+    //    return new SendBackToken("uavoiggpvagiv", 360);
+        return "User erstellt";
     }
 
     /*
@@ -174,7 +177,6 @@ public class MappingController {
                 + tokenIngredient.getIngredients().getName());
         //analog zu addATask von Hartwig
         //Step 1: Check Token
-
         //Step 2: fetch shopping List von DB
         //Step 3: Add Ingredient zu der Shopping List
         listManager.addIngredients(tokenIngredient.getIngredients().getName(), tokenIngredient.getIngredients().getQuantity());
