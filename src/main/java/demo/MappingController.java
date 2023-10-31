@@ -63,11 +63,11 @@ public class MappingController {
     public String userLogin(@RequestBody demo.model.User user ) {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
-        userManager.Login(user.getUserEmail(), user.getUserPassword());
+        String auth = userManager.Login(user.getUserEmail(), user.getUserPassword());
         //Step 2: Wie viele Sekunden soll dieser gelten ?
 
       //  return new SendBackToken("jhnaosvgioa gvi", 67978);
-        return "Hat funktioniert";
+        return auth;
     }
 
     @DeleteMapping(
