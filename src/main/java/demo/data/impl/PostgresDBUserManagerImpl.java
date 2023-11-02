@@ -79,30 +79,21 @@ public class PostgresDBUserManagerImpl implements UserManager {
     public String Login(String Email, String Password)
     {
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
-        readTaskLogger.log(Level.INFO,"Start reading List of Users");
+        readTaskLogger.log(Level.INFO,"Start authentification of the User");
 
 
-        Statement stmt = null;
         Connection connection = null;
 
         try {
             connection = basicDataSource.getConnection();
-            stmt = connection.createStatement();
-
-           List<User>allUsers = readAllUsers();
+            UserImpl u = new UserImpl("hallo","fedfesfs",Password, Email, "logged-off");
 
 
 
 
+            connection.close();
         }
         catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
 
