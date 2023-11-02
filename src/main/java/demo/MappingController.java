@@ -92,10 +92,10 @@ public class MappingController {
     public String registerUser(@RequestBody TokenUser TokenUser) {
             //Step 1: Token kreieren
             //Step 2: fetch data from Userregistrierung in die DB
-        userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(), TokenUser.getUser().getUserPassword(), TokenUser.getUser().getUserEmail());
+        String rs = userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(), TokenUser.getUser().getUserPassword(), TokenUser.getUser().getUserEmail());
             //Step 3: Token an User ausgeben mit validInSeconds
     //    return new SendBackToken("uavoiggpvagiv", 360);
-        return "User erstellt";
+        return rs;
     }
 
     /*
