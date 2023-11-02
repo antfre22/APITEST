@@ -286,6 +286,7 @@ public class MappingController {
         return alexaRO;
     }
 
+    //TestAlexa
     @PostMapping(
             path = "/alexa",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
