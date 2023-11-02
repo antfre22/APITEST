@@ -95,16 +95,9 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
 
 
-
+            connection.close();
         }
         catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
 
