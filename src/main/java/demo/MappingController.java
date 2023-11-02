@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,11 +64,19 @@ public class MappingController {
     public String userLogin(@RequestBody TokenUser user ) {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
-        String auth = userManager.Login(user.getUser().getUserEmail(), user.getUser().getUserPassword());
-        //Step 2: Wie viele Sekunden soll dieser gelten ?
+        List<User> usersFromDB = userManager.readAllUsers();
 
+        Iterator<User> iterator = usersFromDB.iterator();
+        while (iterator.hasNext()) {
+            User currentUser = iterator.next();
+            if (currentUser.getEmail() == user.getUser().getUserEmail()) {
+
+                return "User: " + user.getUser().getUserEmail() + " wurde angemeldet";
+
+            }
+        }
       //  return new SendBackToken("jhnaosvgioa gvi", 67978);
-        return auth;
+        return "Anmeldung fehlgeschlagen";
     }
 
     @DeleteMapping(

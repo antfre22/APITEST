@@ -86,11 +86,8 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
         try {
             connection = basicDataSource.getConnection();
-            UserImpl u = new UserImpl("","",Password, Email, "");
-            List<User>allUsers = readAllUsers();
+            UserImpl u = new UserImpl("hallo","fedfesfs",Password, Email, "logged-off");
 
-                if(allUsers.contains(u))
-                    return "erfolgreich";
 
 
 
