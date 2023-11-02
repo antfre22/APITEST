@@ -23,8 +23,9 @@ import java.util.logging.Logger;
 public class PostgresDBUserManagerImpl implements UserManager {
     String databaseURL = "jdbc:postgresql://ec2-52-1-92-133.compute-1.amazonaws.com:5432/dbq8q1o8ump5db";
     String username = "qkmdiqnoiwgfyj";
-    String password = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
+    String dbpassword = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
 
+    //74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff
     BasicDataSource basicDataSource;
 
     // Singleton
@@ -33,7 +34,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
         basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(databaseURL);
         basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
+        basicDataSource.setPassword(dbpassword);
     }
     public static PostgresDBUserManagerImpl getPostgresDBUserManagerImpl() {
         if (postgresDBUserManager == null)
@@ -168,7 +169,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
             String udapteSQL = "INSERT into users (firstname, lastname, password, email, token, validuntil) VALUES (" +
                     "'" + firstName + "', " +
                     "'" + lastName + "', " +
-                    "'" + password + "', " +
+                    "'" + userPassword + "', " +
                     "'" + email + "', " +
                     "'logged-off', " +
                     "0)";
