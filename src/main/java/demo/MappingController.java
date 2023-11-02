@@ -4,6 +4,9 @@ package demo;
 import demo.data.api.*;
 import demo.data.api.ListManager;
 import demo.data.impl.*;
+import demo.model.Alexa.AlexaRO;
+import demo.model.Alexa.OutputSpeechRO;
+import demo.model.Alexa.ResponseRO;
 import demo.model.ShoppingList;
 import demo.model.SendBackToken;
 import demo.model.TokenIngredient;
@@ -257,6 +260,49 @@ public class MappingController {
         userManager.createUserTable();
 
         return "UserTabelle erstellt";
+    }
+
+    //Alexa
+
+    private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
+
+        alexaRO.setRequest(null);
+        alexaRO.setContext(null);
+        alexaRO.setSession(null);
+        OutputSpeechRO outputSpeechRO = new OutputSpeechRO();
+        outputSpeechRO.setType("PlainText");
+        outputSpeechRO.setText(outText);
+        ResponseRO response = new ResponseRO(outputSpeechRO, shouldEndSession);
+        alexaRO.setResponse(response);
+        return alexaRO;
+    }
+
+    @PostMapping(
+            path = "/alexa",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public AlexaRO sendShoppingListToAlexa(@RequestBody AlexaRO alexaRO) {
+        Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /alexa ");
+        String outText = "";
+
+        if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
+            outText += "Welcome to the Student Food Planer. ";
+
+        if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest")
+                &&
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ReadShoppingListIntent"))
+        ) {
+            outText += "You have to do the following shopping List. ";
+            List<Ingredients> ingredientsForAlexa  = listManager.readAllIngredients();
+            int i = 1;
+            for (Ingredients t : ingredientsForAlexa) {
+                outText += "Ingredient Number " + i + " : " + t.getName()
+                        + " with quantity " + t.getQuantity() + " . ";
+                i++;
+            }
+        }
+        return
+                prepareResponse(alexaRO, outText, true);
     }
 
 
