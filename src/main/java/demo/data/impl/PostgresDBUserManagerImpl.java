@@ -79,18 +79,17 @@ public class PostgresDBUserManagerImpl implements UserManager {
     public String Login(String Email, String Password)
     {
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
-        readTaskLogger.log(Level.INFO,"Start reading List of Users");
+        readTaskLogger.log(Level.INFO,"Start authentification of the User");
 
 
-        Statement stmt = null;
         Connection connection = null;
 
         try {
             connection = basicDataSource.getConnection();
             UserImpl u = new UserImpl("","",Password, Email, "");
-           List<User>allUsers = readAllUsers();
+            List<User>allUsers = readAllUsers();
 
-                if(allUsers.contains(u.getEmail()) && allUsers.contains(u.getPasswort()))
+                if(allUsers.contains(u))
                     return "erfolgreich";
 
 
