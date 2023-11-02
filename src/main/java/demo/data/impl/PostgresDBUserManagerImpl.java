@@ -89,16 +89,11 @@ public class PostgresDBUserManagerImpl implements UserManager {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * " +
-                                                "FROM users" +
-                                                "WHERE Email =" + Email + " and Password = " + Password);
+           List<User>allUsers = readAllUsers();
 
-            if (rs.next()) {
-                return "Anmeldung erfolgreich!";
-            }
-            else {
-               return "Falsche Email oder Passwort!";
-            }
+
+
+
         }
         catch (SQLException e) {
             e.printStackTrace();
