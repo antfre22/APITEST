@@ -4,6 +4,7 @@ package demo;
 import demo.data.api.*;
 import demo.data.api.ListManager;
 import demo.data.impl.*;
+
 import demo.model.Alexa.AlexaRO;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
@@ -302,10 +303,10 @@ public class MappingController {
                 &&
                 (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ReadShoppingListIntent"))
         ) {
-            outText += "You have to do the following shopping List. ";
-            List<Ingredients> ingredientsForAlexa  = listManager.readAllIngredients();
+            outText += "You have the following shopping List. ";
+            List<Ingredients> ingredients  = listManager.readAllIngredients();
             int i = 1;
-            for (Ingredients t : ingredientsForAlexa) {
+            for (Ingredients t : ingredients) {
                 outText += "Ingredient Number " + i + " : " + t.getName()
                         + " with quantity " + t.getQuantity() + " . ";
                 i++;
