@@ -40,7 +40,8 @@ public class MappingController {
     //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
     UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
     ListManager listManager = PostgresDBListManagerImpl.getPostgresDBListManagerImpl();
-    //evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
+
+    RecipeManager recipeManager = PostgresDBRecipeManagerImpl.getPostgresDBRecipeManagerImpl();//evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
     //ähnlich dem Prinzip von Hartwig mit TaskManager
 
     /*
@@ -264,7 +265,7 @@ public class MappingController {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController create-recipes-table " + token);
 
-        listManager.createRecipeTable();
+        recipeManager.createRecipeTable();
 
         return "RezeptTabelle erstellt";
     }
