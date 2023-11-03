@@ -311,7 +311,7 @@ public class MappingController {
             }
         }
         return
-                prepareResponse(alexaRO, outText, true);
+                prepareResponse(alexaRO, outText, false);
     }
 
 }
