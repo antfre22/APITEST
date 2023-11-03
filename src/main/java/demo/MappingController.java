@@ -64,11 +64,11 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     @ResponseStatus(HttpStatus.OK)
-    public String userLogin(@RequestBody Example user) {
+    public String userLogin(@RequestBody UserImpl user) {
         //To-do: Check Verification of the token
-        //Step 1: Check Token des User
-      return   userManager.Login(user.getUserEmail(), user.getUserPassword());
-        // nochmal Iterator und jeden User in eine Liste mit demo.model.User und danach dann iterieren
+        // Step 1: Check Token des User
+      return   userManager.Login(user.getEmail(), user.getPasswort());
+      // nochmal Iterator und jeden User in eine Liste mit demo.model.User und danach dann iterieren
       //  return new SendBackToken("jhnaosvgioa gvi", 67978)
     }
 

@@ -5,6 +5,7 @@ import demo.data.api.UserManager;
 import demo.data.api.User;
 import org.apache.commons.dbcp.BasicDataSource;
 
+import javax.swing.plaf.nimbus.State;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,6 +25,9 @@ public class PostgresDBUserManagerImpl implements UserManager {
     String databaseURL = "jdbc:postgresql://ec2-52-1-92-133.compute-1.amazonaws.com:5432/dbq8q1o8ump5db";
     String username = "qkmdiqnoiwgfyj";
     String dbpassword = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
+
+    //Encoder noch rein
+
 
     //74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff
     BasicDataSource basicDataSource;
@@ -81,7 +85,32 @@ public class PostgresDBUserManagerImpl implements UserManager {
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
         readTaskLogger.log(Level.INFO,"Start authentification of the User");
 
-        Statement stmt = null;
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            readTaskLogger.info("Connection established.");
+
+            String selectSQL = "SELECT * FROM users WHERE Email = ? AND Password = ?;";
+            stmt = connection.prepareStatement(selectSQL);
+            stmt.setString(1, Email);
+            stmt.setString(2, Password);
+            readTaskLogger.info("Executing query with username: " + username);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+                readTaskLogger.info("User found in Database");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+   /*     Statement stmt = null;
         Connection connection = null;
         List<User> myUsers = readAllUsers();
         User userT = null;
@@ -103,6 +132,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
         catch (SQLException e) {
             e.printStackTrace();
         }
+    */
 
         return "Hat noch nicht funktioniert";
     }
