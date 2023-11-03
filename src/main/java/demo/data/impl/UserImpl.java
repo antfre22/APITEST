@@ -37,7 +37,7 @@ public class UserImpl implements User{
 
     @Override
     public String getPasswort() {
-        return null;
+        return password;
     }
 
     @Override
