@@ -274,7 +274,7 @@ public class MappingController {
     @GetMapping("/create-recipes-table")
     public String createRecipeTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
-                .log(Level.INFO,"MappingController create-recipes-table ");
+                .log(Level.INFO,"MappingController create-recipes-table " + token);
 
         listManager.createRecipeTable();
 
