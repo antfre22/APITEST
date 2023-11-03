@@ -103,7 +103,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
             if (rs.next())
             {
-                readTaskLogger.info("User found in Database");
+                return "erfolgreich";
             }
 
         } catch (SQLException e) {
