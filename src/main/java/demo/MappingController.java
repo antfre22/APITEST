@@ -298,12 +298,12 @@ public class MappingController {
     }
 
     //TestAlexa
-    @GetMapping(
+    @PostMapping(
             path = "/alexa",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public AlexaRO sendShoppingListToAlexa(@RequestBody AlexaRO alexaRO) {
-        Logger.getLogger("MappingController").log(Level.INFO,"MappingController GET /alexa ");
+        Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /alexa ");
         String outText = "";
 
         if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
