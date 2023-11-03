@@ -65,12 +65,38 @@ public class MappingController {
     )
     @ResponseStatus(HttpStatus.OK)
     public String userLogin(@RequestBody UserImpl user) {
+        try {
+            // Log the received email and password for debugging purposes
+            System.out.println("Received Email: " + user.getEmail() + " Password: " + user.getPasswort());
+
+            String loginResult = userManager.Login(user.getEmail(), user.getPasswort());
+
+            if (loginResult != null) {
+                // If authentication is successful, return the success message
+                return "Successfull";
+            } else {
+                // If authentication fails, return an appropriate error message and status code
+                return "Fehler";
+            }
+        } catch (Exception e) {
+            // Log exception and return an appropriate error message and status code
+            e.printStackTrace();
+            return "Error";
+        }
+    }
+   /* @PostMapping(
+            path = ("/auth/login"),
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    @ResponseStatus(HttpStatus.OK)
+    public String userLogin(@RequestBody UserImpl user) {
         //To-do: Check Verification of the token
         // Step 1: Check Token des User
-      return   userManager.Login(user.getEmail(), user.getPasswort());
+      return  userManager.Login(user.getEmail(), user.getPasswort());
+
       // nochmal Iterator und jeden User in eine Liste mit demo.model.User und danach dann iterieren
       //  return new SendBackToken("jhnaosvgioa gvi", 67978)
-    }
+    }  */
 
     @DeleteMapping(
             path = ("/auth/logoff"),
