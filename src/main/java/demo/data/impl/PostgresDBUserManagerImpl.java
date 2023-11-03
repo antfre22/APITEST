@@ -93,11 +93,11 @@ public class PostgresDBUserManagerImpl implements UserManager {
             connection = basicDataSource.getConnection();
             readTaskLogger.info("Connection established.");
 
-            String selectSQL = "SELECT * FROM users WHERE Email = ? AND Password = ?;";
+            String selectSQL = "SELECT * FROM users WHERE email = ? AND password = ?;";
             stmt = connection.prepareStatement(selectSQL);
             stmt.setString(1, Email);
             stmt.setString(2, Password);
-            readTaskLogger.info("Executing query with Email: " + Email);
+            readTaskLogger.info("Executing query with email: " + Email);
 
             rs = stmt.executeQuery();
 
