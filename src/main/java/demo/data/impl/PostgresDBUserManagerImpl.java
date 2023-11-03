@@ -97,13 +97,19 @@ public class PostgresDBUserManagerImpl implements UserManager {
             stmt = connection.prepareStatement(selectSQL);
             stmt.setString(1, Email);
             stmt.setString(2, Password);
-            readTaskLogger.info("Executing query with username: " + username);
+            readTaskLogger.info("Executing query with Email: " + Email);
 
             rs = stmt.executeQuery();
 
             if (rs.next())
             {
-                readTaskLogger.info("User found in Database");
+                readTaskLogger.info("User found in database");
+                return "erfolgreich";
+            }
+            else
+            {
+                readTaskLogger.warning("No user Found");
+                return null;
             }
 
         } catch (SQLException e) {
@@ -133,8 +139,6 @@ public class PostgresDBUserManagerImpl implements UserManager {
             e.printStackTrace();
         }
     */
-
-        return "Hat noch nicht funktioniert";
     }
 
 
