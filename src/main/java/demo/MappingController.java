@@ -309,8 +309,9 @@ public class MappingController {
         if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
             outText += "Welcome to the Student Food Planer. ";
 
-        if
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ReadShoppingListIntent")
+        if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest")
+                &&
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ReadShoppingListIntent"))
         ) {
             outText += "You have the following shopping List. ";
             List<Ingredients> ingredients  = listManager.readAllIngredients();
