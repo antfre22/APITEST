@@ -2,7 +2,7 @@ package demo.data.impl;
 import demo.data.api.Recipe;
 import demo.data.api.RecipeManager;
 import org.apache.commons.dbcp.BasicDataSource;
-
+import java.util.Date;
 import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,12 +39,39 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
 
     @Override
     public List<Recipe> readAllRecipes() {
+
         return null;
     }
 
     @Override
-    public void addRecipes(Recipe recipe) {
+    public void addRecipes(String recipeName, Date datum) {
+        final Logger createRecipeLogger = Logger.getLogger("AddRecipeLogger");
+        createRecipeLogger.log(Level.INFO,"Start adding recipe" + recipeName);
 
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+
+            String udapteSQL = "INSERT into recipes (recipeName, datum) VALUES (" +
+                    "'" + recipeName+ "', "
+                    + "'" + datum + "')";
+
+            stmt.executeUpdate(udapteSQL);
+
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -55,7 +82,6 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
         try {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
-
 
             String createTable = "CREATE TABLE recipes (" +
                     "id SERIAL PRIMARY KEY, " +

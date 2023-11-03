@@ -203,7 +203,7 @@ public class MappingController {
     )
     public String addIngredient(@RequestBody TokenIngredient tokenIngredient) {
 
-        Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /tasks "
+        Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /shoppinglist "
                 + tokenIngredient.getIngredients().getName());
         //analog zu addATask von Hartwig
         //Step 1: Check Token
@@ -229,12 +229,25 @@ public class MappingController {
         return "shoppingList got deleted";
     }
     @DeleteMapping("/shoppinglist/ingredient")
-
     public String deleteIngredient(@RequestParam int ingredient) {
         //Step 1: Check Token
         listManager.deleteIngredient(ingredient);
         //Step 2: delete specific ingredient from shopping List in der DB
         return "We deleted the following ingredient: " +  ingredient ;
+    }
+
+    @PostMapping(
+            path = ("/recipes"),
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public String saveRecipeInDB(@RequestBody TokenRecipe tokenRecipe){
+        Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /recipes "
+                + tokenRecipe.getRecipe().getName());
+
+            recipeManager.addRecipes(tokenRecipe.getRecipe().getName(),tokenRecipe.getRecipe().getDate());
+
+        return "Succesfull add of recipe: " + tokenRecipe.getRecipe().getName() +
+                " and Date: " + tokenRecipe.getRecipe().getDate();
     }
 
     @GetMapping("/create-list-table")

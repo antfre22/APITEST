@@ -80,8 +80,8 @@ public class PostgresDBListManagerImpl implements ListManager {
     @Override
     public void addIngredients(String ingredients, float quantity) {
 
-        final Logger createTaskLogger = Logger.getLogger("CreateTaskLogger");
-        createTaskLogger.log(Level.INFO,"Start creating task " + ingredients);
+        final Logger addIngredientsLogger = Logger.getLogger("AddIngredientsLogger");
+        addIngredientsLogger.log(Level.INFO,"Start adding ingredient: " + ingredients);
 
         Statement stmt = null;
         Connection connection = null;
@@ -144,6 +144,10 @@ public class PostgresDBListManagerImpl implements ListManager {
     public void deleteIngredient(int ingredient) {
         Statement stmt = null;
         Connection connection = null;
+
+        final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
+        deleteIngredientsLogger.log(Level.INFO,"Start deleting ingredient at id= " + ingredient);
+
 
         try {
             connection = basicDataSource.getConnection();
