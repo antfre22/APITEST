@@ -58,10 +58,10 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
 
 
             String createTable = "CREATE TABLE recipes (" +
-                    "id SERIAL PRIMARY KEY" +
-                    "marker varchar(100) NOT NULL " +
-                    "recipeName varchar(100) NOT NULL " +
-                    "RezDatum date NOT NULL)";
+                    "id SERIAL PRIMARY KEY, " +
+                    "TokenOfUser varchar(100) NOT NULL, " +
+                    "recipeName varchar(100) NOT NULL, " +
+                    "datum date NOT NULL)";
 
             stmt.executeUpdate(createTable);
 
