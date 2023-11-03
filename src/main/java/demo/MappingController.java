@@ -2,16 +2,16 @@ package demo;
 
 
 import demo.data.api.*;
+import demo.data.api.Ingredients;
 import demo.data.api.ListManager;
+import demo.data.api.User;
 import demo.data.impl.*;
 
+import demo.model.*;
 import demo.model.Alexa.AlexaRO;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
 import demo.model.ShoppingList;
-import demo.model.SendBackToken;
-import demo.model.TokenIngredient;
-import demo.model.UserList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import demo.model.TokenUser;
-
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -66,22 +64,12 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     @ResponseStatus(HttpStatus.OK)
-    public String userLogin(@RequestBody TokenUser user ) {
+    public String userLogin(@RequestBody Example user) {
         //To-do: Check Verification of the token
-        //Step 1: Check Token des Users
-        List<User> usersFromDB = userManager.readAllUsers();
+        //Step 1: Check Token des User
+      return   userManager.Login(user.getUserEmail(), user.getUserPassword());
         // nochmal Iterator und jeden User in eine Liste mit demo.model.User und danach dann iterieren
-
-        Iterator<User> iterator = usersFromDB.iterator();
-        while (iterator.hasNext()) {
-            User currentUser = iterator.next();
-            if (currentUser.getEmail().equals(user.getUser().getUserEmail()))
-                return "User: " + user.getUser().getUserEmail() + " wurde angemeldet";
-
-            }
-
-      //  return new SendBackToken("jhnaosvgioa gvi", 67978);
-        return "Anmeldung fehlgeschlagen";
+      //  return new SendBackToken("jhnaosvgioa gvi", 67978)
     }
 
     @DeleteMapping(
