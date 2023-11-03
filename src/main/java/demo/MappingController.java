@@ -9,6 +9,7 @@ import demo.data.impl.*;
 
 import demo.model.*;
 import demo.model.Alexa.AlexaRO;
+import demo.model.Alexa.AlexaRequestParser;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
 import demo.model.ShoppingList;
@@ -292,7 +293,7 @@ public class MappingController {
             path = "/alexa",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public AlexaRO sendShoppingListToAlexa(@RequestBody AlexaRO alexaRO) {
+    public AlexaRO sendShoppingListToAlexa(@RequestBody AlexaRO alexaRO, TokenIngredient tokenIngredient) {
         Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /alexa ");
         String outText = "";
 
@@ -312,8 +313,30 @@ public class MappingController {
                 i++;
             }
         }
+        else if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest")
+                &&
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("AddIngredient"))
+        ){
+            String ingredientName = AlexaRequestParser.getSlotValue(alexaRO.getJsonRequest(), "Ingredient");
+
+
+            String ingredientQuantity = AlexaRequestParser.getSlotValue(alexaRO.getJsonRequest(), "Quantity");
+
+            if (ingredientName != null && ingredientQuantity != null) {
+                // Fügen Sie das Ingredient zur Einkaufsliste hinzu
+                listManager.addIngredients(ingredientName, Integer.parseInt(ingredientQuantity));
+                outText += "Added " + ingredientName + " with quantity " + ingredientQuantity + " to your shopping list. ";
+            } else {
+                outText += "I'm sorry, I couldn't understand the ingredient information. Please try again.";
+            }
+            // Optionally, you can provide a confirmation message here
+            outText += "I've added " + ingredientName + " with quantity " + ingredientQuantity + " to your shopping list. ";
+        }
+
+
         return
                 prepareResponse(alexaRO, outText, false);
     }
+
 
 }

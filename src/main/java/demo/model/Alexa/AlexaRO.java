@@ -1,6 +1,7 @@
 package demo.model.Alexa;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,18 @@ public class AlexaRO
     public AlexaRO(String version)
     {
         super();
+    }
+    @JsonProperty("request")
+    private JsonNode Jsonrequest;
+
+    // Getter und Setter für die 'request' Eigenschaft
+
+    public JsonNode getJsonRequest() {
+        return Jsonrequest;
+    }
+
+    public void setJsonRequest(JsonNode Jsonrequest) {
+        this.Jsonrequest = Jsonrequest;
     }
 
     @JsonProperty("request")

@@ -18,6 +18,9 @@ public class IntentRO
     // private SlotsRO slots;
     // So müsste es weitergehen, wenn der Intent Slots hat
     //
+    @JsonProperty("slots")
+    private SlotsRO slots;
+
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -53,4 +56,11 @@ public class IntentRO
         this.additionalProperties.put(name, value);
     }
 
+    public SlotsRO getSlots() {
+        return slots;
+    }
+
+    public void setSlots(SlotsRO slots) {
+        this.slots = slots;
+    }
 }
