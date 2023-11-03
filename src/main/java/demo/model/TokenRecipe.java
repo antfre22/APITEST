@@ -6,37 +6,34 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
-
-public class TokenIngredient {
-
+public class TokenRecipe {
+    private Recipe recipe;
     private String token;
-    private Ingredients ingredients;
+
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public TokenIngredient() {
-    }
-
-    public TokenIngredient(Ingredients ingredients, String token) {
-        this.ingredients = ingredients;
+    public TokenRecipe(){}
+    public TokenRecipe(Recipe recipe, String token) {
+        this.recipe = recipe;
         this.token = token;
     }
-
     public String getToken() {
+
         return token;
     }
 
     public void setToken(String token) {
+
         this.token = token;
     }
-
-    public Ingredients getIngredients() {
-        return ingredients;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setIngredients(Ingredients ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @JsonAnyGetter
@@ -50,5 +47,7 @@ public class TokenIngredient {
 
         this.additionalProperties.put(name, value);
     }
-}
 
+
+
+}

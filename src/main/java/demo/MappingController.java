@@ -69,6 +69,7 @@ public class MappingController {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
         List<User> usersFromDB = userManager.readAllUsers();
+        // nochmal Iterator und jeden User in eine Liste mit demo.model.User und danach dann iterieren
 
         Iterator<User> iterator = usersFromDB.iterator();
         while (iterator.hasNext()) {
@@ -260,7 +261,7 @@ public class MappingController {
     //test1234
 
     @GetMapping("/create-user-table")
-    public String createUserTable(@RequestParam(value = "token", defaultValue = "an dem liegts") String token) {
+    public String createUserTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController create-user-table " + token);
 
@@ -269,6 +270,15 @@ public class MappingController {
         userManager.createUserTable();
 
         return "UserTabelle erstellt";
+    }
+    @GetMapping("/create-recipes-table")
+    public String createRecipeTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+        Logger.getLogger("MappingController")
+                .log(Level.INFO,"MappingController create-recipes-table ");
+
+        listManager.createRecipeTable();
+
+        return "RezeptTabelle erstellt";
     }
 
     //Alexa

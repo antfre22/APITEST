@@ -163,5 +163,34 @@ public class PostgresDBListManagerImpl implements ListManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+    public void createRecipeTable() {
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+
+
+            String createTable = "CREATE TABLE recipes (" +
+                    "eventID SERIAL PRIMARY KEY" +
+                    "userToken varchar(100) NOT NULL " +
+                    "recipeName varchar(100) NOT NULL " +
+                    "RezDatum date NOT NULL)";
+
+            stmt.executeUpdate(createTable);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

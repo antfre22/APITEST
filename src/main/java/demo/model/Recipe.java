@@ -6,49 +6,49 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
 
-public class TokenIngredient {
+public class Recipe {
+    private String name = "";
 
-    private String token;
-    private Ingredients ingredients;
+
+
+    private Date date = new Date();
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public TokenIngredient() {
+    public Recipe() { }
+
+    public Recipe(String name, Date date) {
+        this.name = name;
+        this.date = date;
     }
 
-    public TokenIngredient(Ingredients ingredients, String token) {
-        this.ingredients = ingredients;
-        this.token = token;
+    public String getName() {
+
+        return name;
     }
 
-    public String getToken() {
-        return token;
+    public void setName(String name) {
+
+        this.name = name;
+    }
+    public Date getDate() {
+        return date;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setDate(Date date) {
+        this.date = date;
     }
-
-    public Ingredients getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(Ingredients ingredients) {
-        this.ingredients = ingredients;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
-
         return this.additionalProperties;
     }
 
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
-
         this.additionalProperties.put(name, value);
     }
-}
 
+}
