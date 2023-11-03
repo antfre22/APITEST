@@ -75,7 +75,7 @@ public class MappingController {
             User currentUser = iterator.next();
             if (currentUser.getPasswort().equals(user.getUser().getUserPassword())) {
     //currentUser.getEmail().equals(user.getUser().getUserEmail())
-                return "User: " + user.getUser().getUserEmail() + " wurde angemeldet";
+                return "User: " + user.getUser().getUserPassword() + " wurde angemeldet";
 
             }
         }
