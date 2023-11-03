@@ -73,12 +73,11 @@ public class MappingController {
         Iterator<User> iterator = usersFromDB.iterator();
         while (iterator.hasNext()) {
             User currentUser = iterator.next();
-            if (currentUser.getPasswort().equals(user.getUser().getUserPassword())) {
-    //currentUser.getEmail().equals(user.getUser().getUserEmail())
-                return "User: " + user.getUser().getUserPassword() + " wurde angemeldet";
+            if (currentUser.getEmail().equals(user.getUser().getUserEmail()) && currentUser.getFirstName().equals(user.getUser().getFirstName()))
+                return "User: " + user.getUser().getUserEmail() + " wurde angemeldet";
 
             }
-        }
+
       //  return new SendBackToken("jhnaosvgioa gvi", 67978);
         return "Anmeldung fehlgeschlagen";
     }
