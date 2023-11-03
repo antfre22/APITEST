@@ -299,9 +299,9 @@ public class MappingController {
 
         if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest")
                 &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("indregientslist"))
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ReadShoppingListIntent"))
         ) {
-            outText += "You have the following List. ";
+            outText += "You have the following shopping List. ";
             List<Ingredients> ingredients  = listManager.readAllIngredients();
             int i = 1;
             for (Ingredients t : ingredients) {
@@ -313,6 +313,5 @@ public class MappingController {
         return
                 prepareResponse(alexaRO, outText, true);
     }
-
 
 }
