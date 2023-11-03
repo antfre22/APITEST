@@ -65,7 +65,7 @@ public class MappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     @ResponseStatus(HttpStatus.OK)
-    public String userLogin(@RequestBody TokenUser user ) {
+    public String userLogin(@RequestBody demo.model.User user ) {
         //To-do: Check Verification of the token
         //Step 1: Check Token des Users
         List<User> usersFromDB = userManager.readAllUsers();
@@ -73,9 +73,9 @@ public class MappingController {
         Iterator<User> iterator = usersFromDB.iterator();
         while (iterator.hasNext()) {
             User currentUser = iterator.next();
-            if (currentUser.getEmail() == user.getUser().getUserEmail()) {
+            if (currentUser.getEmail() == user.getUserEmail()) {
 
-                return "User: " + user.getUser().getUserEmail() + " wurde angemeldet";
+                return "User: " + user.getUserEmail() + " wurde angemeldet";
 
             }
         }
