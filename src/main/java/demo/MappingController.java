@@ -73,8 +73,8 @@ public class MappingController {
         Iterator<User> iterator = usersFromDB.iterator();
         while (iterator.hasNext()) {
             User currentUser = iterator.next();
-            if (currentUser.getEmail().equals(user.getUser().getUserEmail())) {
-
+            if (currentUser.getPasswort().equals(user.getUser().getUserPassword())) {
+    //currentUser.getEmail().equals(user.getUser().getUserEmail())
                 return "User: " + user.getUser().getUserEmail() + " wurde angemeldet";
 
             }
