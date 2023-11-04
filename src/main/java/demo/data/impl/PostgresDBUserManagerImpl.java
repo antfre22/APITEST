@@ -208,7 +208,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
                     "'" + userPassword + "', " +
                     "'" + email + "', " +
                     "'logged-off', " +
-                    "0)";
+                    "null)";
 
             stmt.executeUpdate(udapteSQL);
 
