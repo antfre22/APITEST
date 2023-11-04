@@ -58,7 +58,7 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             String udapteSQL = "INSERT into recipes (recipeName, datum, TokenOfUser) VALUES (" +
                     "'" + recipeName+ "', "
                     + "'" + datum + "')"
-                    + "notoken";
+                    + "'notoken'";
 
             stmt.executeUpdate(udapteSQL);
 
