@@ -55,9 +55,10 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
 
-            String udapteSQL = "INSERT into recipes (recipeName, datum) VALUES (" +
+            String udapteSQL = "INSERT into recipes (recipeName, datum, TokenOfUser) VALUES (" +
                     "'" + recipeName+ "', "
-                    + "'" + datum + "')";
+                    + "'" + datum + "')"
+                    + "'no token'";
 
             stmt.executeUpdate(udapteSQL);
 
