@@ -46,7 +46,7 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
     @Override
     public void addRecipes(String recipeName, Date datum) {
         final Logger createRecipeLogger = Logger.getLogger("AddRecipeLogger");
-        createRecipeLogger.log(Level.INFO,"Start adding recipe" + recipeName);
+        createRecipeLogger.log(Level.INFO,"Start adding recipe " + recipeName);
 
         Statement stmt = null;
         Connection connection = null;
@@ -55,10 +55,10 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
 
-            String udapteSQL = "INSERT into recipes (recipeName, datum, TokenOfUser) VALUES (" +
+            String udapteSQL = "INSERT into recipes ( TokenOfUser, recipeName, datum) VALUES (" +
+                    " 'notoken', " +
                     "'" + recipeName+ "', "
-                    + "'" + datum + "')"
-                    + "'notoken'";
+                    + "'" + datum + "')";
 
             stmt.executeUpdate(udapteSQL);
 
