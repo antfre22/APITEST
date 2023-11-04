@@ -107,7 +107,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
                Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
 
-               String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?";
+               String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?;";
                PreparedStatement newStmt = connection.prepareStatement(updateSQL);
                newStmt.setString(1, token);
                newStmt.setTimestamp(2, validUntil);
