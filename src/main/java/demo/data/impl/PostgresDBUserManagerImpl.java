@@ -9,15 +9,11 @@ import javax.swing.plaf.nimbus.State;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +22,10 @@ public class PostgresDBUserManagerImpl implements UserManager {
     String username = "qkmdiqnoiwgfyj";
     String dbpassword = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
 
-    //Encoder noch rein
+    public String tokenGenerator() {
+
+        return UUID.randomUUID().toString();
+    }
 
 
     //74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff
@@ -104,7 +103,17 @@ public class PostgresDBUserManagerImpl implements UserManager {
             if (rs.next())
             {
                 readTaskLogger.info("User found in database");
-                return "erfolgreich";
+               String token = tokenGenerator();
+
+                Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+
+               String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?";
+               PreparedStatement newStmt = connection.prepareStatement(updateSQL);
+               newStmt.setString(1, token);
+               newStmt.setTimestamp(2, validUntil);
+               newStmt.setString(3, Email);
+
+               return "Erfolgreich";
             }
             else
             {
