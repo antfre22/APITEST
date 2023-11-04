@@ -23,8 +23,8 @@ public class PostgresDBUserManagerImpl implements UserManager {
     String dbpassword = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
 
     public String tokenGenerator() {
-
-        return UUID.randomUUID().toString();
+      return "20";
+     //   return UUID.randomUUID().toString();
     }
 
 
@@ -105,7 +105,8 @@ public class PostgresDBUserManagerImpl implements UserManager {
                 readTaskLogger.info("User found in database");
                String token = tokenGenerator();
 
-               Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+             //  Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+                Timestamp validUntil = new Timestamp(20);
 
                String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?;";
                PreparedStatement newStmt = connection.prepareStatement(updateSQL);
