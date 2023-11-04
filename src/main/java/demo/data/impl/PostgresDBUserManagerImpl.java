@@ -61,8 +61,8 @@ public class PostgresDBUserManagerImpl implements UserManager {
                     "lastname varchar(100) NOT NULL, " +
                     "password varchar(100) NOT NULL, " +
                     "email varchar(100) NOT NULL, " +
-                    "token varchar(100) NOT NULL, " +
-                    "validuntil float NOT NULL)";
+                    "token varchar(100), " +
+                    "validuntil TIMESTAMP)";
 
 
             stmt.executeUpdate(createUserTable);
@@ -105,7 +105,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
                 readTaskLogger.info("User found in database");
                String token = tokenGenerator();
 
-                Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+               Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
 
                String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?";
                PreparedStatement newStmt = connection.prepareStatement(updateSQL);
