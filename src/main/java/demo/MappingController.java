@@ -70,8 +70,6 @@ public class MappingController {
         //To-do: Check Verification of the token
         // Step 1: Check Token des User
       return  userManager.Login(user.getEmail(), user.getPasswort());
-
-      // nochmal Iterator und jeden User in eine Liste mit demo.model.User und danach dann iterieren
       //  return new SendBackToken("jhnaosvgioa gvi", 67978)
     }
 
@@ -79,10 +77,10 @@ public class MappingController {
             path = ("/auth/logoff"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public String userLogoff() {
+    public String userLogoff(@RequestBody UserImpl user) {
         //Step 1: Token des Users löschen
+        return userManager.Logout(user.getEmail());
         //Step 2: Ausgabe Log off war erfolgreich
-        return "Log off was succesfull";
     }
 
     /*
@@ -95,10 +93,9 @@ public class MappingController {
     )
     @ResponseStatus(HttpStatus.OK)
     public String registerUser(@RequestBody TokenUser TokenUser) {
-            //Step 1: Token kreieren
-            //Step 2: fetch data from Userregistrierung in die DB
+
         String rs = userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(), TokenUser.getUser().getUserPassword(), TokenUser.getUser().getUserEmail());
-            //Step 3: Token an User ausgeben mit validInSeconds
+
     //    return new SendBackToken("uavoiggpvagiv", 360);
         return rs;
     }

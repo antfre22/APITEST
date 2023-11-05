@@ -126,31 +126,49 @@ public class PostgresDBUserManagerImpl implements UserManager {
             throw new RuntimeException(e);
         }
 
-   /*     Statement stmt = null;
-        Connection connection = null;
-        List<User> myUsers = readAllUsers();
-        User userT = null;
 
-        for (User u : myUsers){
-            if(u.getEmail().equals(Email))
-            {
-                userT = u;
-            }
-        }
-        if(!userT.getPasswort().equals(Password))
-        {
-            return null;
-        }
-        try {
-            connection = basicDataSource.getConnection();
-            connection.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    */
+
     }
 
+    public String Logout(String Email) {
+        final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
+        readTaskLogger.log(Level.INFO, "Start authentification of the User");
+
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        try {
+            connection = basicDataSource.getConnection();
+            readTaskLogger.info("Connection established.");
+
+            String updateSQL = "UPDATE users SET token = NULL, validuntil = NULL WHERE email = ?;";
+            stmt = connection.prepareStatement(updateSQL);
+            stmt.setString(1, Email);
+
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                readTaskLogger.info("User logged out successfully.");
+                return "User wurde ausgeloggt";
+            } else {
+                readTaskLogger.warning("User not found or already logged out.");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // Close resources (stmt, connection) and handle exceptions if needed.
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return "nicht funktioniert";
+    }
 
     public List<User> readAllUsers(){
 
@@ -223,14 +241,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
         return "Added User with name: " + firstName + " and email:  " + email ;
     }
-    public User logUserIn(String email, String password){
-        UserImpl user = new UserImpl("Hallo","Test","ganzstark", "","");
-        return user;
-    }
-    public User logUserOff(String email, String token){
-        UserImpl user = new UserImpl("Hallo","Test", "ganzstark", "", "");
-        return user;
-    }
+
     public String getEmailForToken(String token){
 
         return "hello";
