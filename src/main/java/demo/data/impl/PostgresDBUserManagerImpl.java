@@ -114,7 +114,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
                newStmt.setTimestamp(2, validUntil);
                newStmt.setString(3, Email);
                newStmt.executeUpdate();
-               return "Erfolgreich";
+               return token;
             }
             else
             {
