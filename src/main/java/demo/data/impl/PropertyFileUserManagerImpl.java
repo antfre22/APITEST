@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PropertyFileUserManagerImpl implements UserManager {
-
+//Brauchen wir den überhapt??
     String userPropertyFile;
 
     // Singleton
@@ -85,60 +85,7 @@ public class PropertyFileUserManagerImpl implements UserManager {
     }
 
 
-    @Override
-    public User logUserIn(String email, String password) {
 
-        final Logger loginUserLogger = Logger.getLogger("LoginUserLogger");
-        loginUserLogger.log(Level.INFO,"Start logging in " + email);
-
-        List<User> users = readAllUsers();
-
-        loginUserLogger.log(Level.INFO,"Finding user.");
-        for (int i = 0; i < users.size(); i++) {
-            User temp = users.get(i);
-            if (temp.getEmail().equals(email)) {
-                loginUserLogger.log(Level.INFO,"User found. Setting his token. Ignoring password check.");
-                // users.set(i, new UserImpl(temp.getFirstName(), temp.getLastName(), temp.getPassword(), temp.getEmail(),
-                //        System.currentTimeMillis() + "", 0)
-                //        );
-            }
-            loginUserLogger.log(Level.INFO,"Writing data back to file.");
-            storeAllUsers(users);
-
-            return
-                    users.get(i);
-        }
-
-        return null;
-    }
-
-    @Override
-    public User logUserOff(String email, String token) {
-
-        final Logger loginOffLogger = Logger.getLogger("LogoffUserLogger");
-        loginOffLogger.log(Level.INFO,"Start logging off " + email);
-
-        List<User> users = readAllUsers();
-
-        loginOffLogger.log(Level.INFO,"Finding user.");
-        for (int i = 0; i < users.size(); i++) {
-            User temp = users.get(i);
-            if (temp.getEmail().equals(email)) {
-                loginOffLogger.log(Level.INFO,"User found. Setting his token. Ignoring token check.");
-                // users.set(i, new UserImpl(temp.getFirstName(), temp.getLastName(), temp.getPassword(), temp.getEmail(),
-                //        "logged-off", 0)
-                //);
-            }
-
-            loginOffLogger.log(Level.INFO,"Writing data back to file.");
-            storeAllUsers(users);
-
-            return
-                    users.get(i);
-        }
-
-        return null;
-    }
 
     @Override
     public String getEmailForToken(String token) {
@@ -151,6 +98,11 @@ public class PropertyFileUserManagerImpl implements UserManager {
     @Override
     public String Login(String Email, String Password) {
         return "falsche Methode genommen";
+    }
+
+    @Override
+    public String Logout(String Email) {
+        return "falsche methode genommen";
     }
 
     @Override
