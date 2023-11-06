@@ -167,11 +167,11 @@ public class PostgresDBListManagerImpl implements ListManager {
     //Delete Ingredient Neu
 
     @Override
-    public void deleteIngredientZwei(String Ingredient) {
+    public void deleteIngredientZwei(String ingredient) {
 
 
         final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
-        deleteIngredientsLogger.log(Level.INFO, "Start deleting ingredient at name= " + Ingredient);
+        deleteIngredientsLogger.log(Level.INFO, "Start deleting ingredient at name= " + ingredient);
 
 
         Connection connection = null;
@@ -184,7 +184,7 @@ public class PostgresDBListManagerImpl implements ListManager {
 
             String deleteSQL = "DELETE FROM shoppingList WHERE ingredients = ?;";
             stmt = connection.prepareStatement(deleteSQL);
-            stmt.setString(1, Ingredient);
+            stmt.setString(1, ingredient);
 
 
             int rowsAffected = stmt.executeUpdate();

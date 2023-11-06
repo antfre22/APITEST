@@ -235,9 +235,9 @@ public class MappingController {
     }
 
     @DeleteMapping("/shoppinglist/ingredientzwei")
-    public String deleteIngredientzwei(@RequestParam String Ingredient) {
-        listManager.deleteIngredientZwei(Ingredient);
-        return "Following Ingredient deleted: " + Ingredient ;
+    public String deleteIngredientzwei(@RequestBody TokenIngredient ingredient) {
+        listManager.deleteIngredientZwei(ingredient.getIngredients().getName());
+        return "Following Ingredient deleted: " + ingredient.getIngredients().getName() ;
     }
 
     @PostMapping(
