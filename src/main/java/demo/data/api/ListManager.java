@@ -9,4 +9,5 @@ public interface ListManager {
      void deleteIngredient(int ingredient);
 
 
+    void deleteIngredientZwei(String Ingredient);
 }

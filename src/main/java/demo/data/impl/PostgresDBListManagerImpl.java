@@ -4,17 +4,9 @@ import demo.data.api.Ingredients;
 import demo.data.api.ListManager;
 import org.apache.commons.dbcp.BasicDataSource;
 
+import java.sql.*;
 import java.util.List;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Properties;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,12 +20,14 @@ public class PostgresDBListManagerImpl implements ListManager {
 
     // Singleton
     static PostgresDBListManagerImpl postgresDBListManager = null;
+
     private PostgresDBListManagerImpl() {
         basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(databaseURL);
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
     }
+
     public static PostgresDBListManagerImpl getPostgresDBListManagerImpl() {
         if (postgresDBListManager == null)
             postgresDBListManager = new PostgresDBListManagerImpl();
@@ -44,7 +38,7 @@ public class PostgresDBListManagerImpl implements ListManager {
     @Override
     public List<Ingredients> readAllIngredients() {
         final Logger readTaskLogger = Logger.getLogger("ReadListLogger");
-        readTaskLogger.log(Level.INFO,"Start reading shoppingList ");
+        readTaskLogger.log(Level.INFO, "Start reading shoppingList ");
 
         List<Ingredients> ingredients = new ArrayList<>();
         Statement stmt = null;
@@ -81,7 +75,7 @@ public class PostgresDBListManagerImpl implements ListManager {
     public void addIngredients(String ingredients, float quantity) {
 
         final Logger addIngredientsLogger = Logger.getLogger("AddIngredientsLogger");
-        addIngredientsLogger.log(Level.INFO,"Start adding ingredient: " + ingredients);
+        addIngredientsLogger.log(Level.INFO, "Start adding ingredient: " + ingredients);
 
         Statement stmt = null;
         Connection connection = null;
@@ -146,7 +140,7 @@ public class PostgresDBListManagerImpl implements ListManager {
         Connection connection = null;
 
         final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
-        deleteIngredientsLogger.log(Level.INFO,"Start deleting ingredient at id= " + ingredient);
+        deleteIngredientsLogger.log(Level.INFO, "Start deleting ingredient at id= " + ingredient);
 
 
         try {
@@ -170,4 +164,52 @@ public class PostgresDBListManagerImpl implements ListManager {
 
     }
 
+    //Delete Ingredient Neu
+
+    @Override
+    public void deleteIngredientZwei(String Ingredient) {
+
+
+        final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
+        deleteIngredientsLogger.log(Level.INFO, "Start deleting ingredient at name= " + Ingredient);
+
+
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            deleteIngredientsLogger.info("Connection erfolgreich");
+
+
+            String deleteSQL = "DELETE FROM shoppingList WHERE ingredients = ?;";
+            stmt = connection.prepareStatement(deleteSQL);
+            stmt.setString(1, Ingredient);
+
+
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                deleteIngredientsLogger.info("Deleted successfully.");
+
+            } else {
+                deleteIngredientsLogger.warning("Zutat nicht da.");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // Close resources (stmt, connection) and handle exceptions if needed.
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
 }

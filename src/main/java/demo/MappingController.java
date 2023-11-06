@@ -234,6 +234,12 @@ public class MappingController {
         return "We deleted the following ingredient: " +  ingredient ;
     }
 
+    @DeleteMapping("/shoppinglist/ingredientzwei")
+    public String deleteIngredientzwei(@RequestParam String Ingredient) {
+        listManager.deleteIngredientZwei(Ingredient);
+        return "Following Ingredient deleted: " + Ingredient ;
+    }
+
     @PostMapping(
             path = ("/recipes"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
