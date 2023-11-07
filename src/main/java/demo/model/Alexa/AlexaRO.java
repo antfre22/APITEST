@@ -27,6 +27,16 @@ public class AlexaRO {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
+    public AlexaRO()
+    {
+        super();
+    }
+
+    public AlexaRO(String version)
+    {
+        super();
+    }
+
     // Getter und Setter für die 'request' Eigenschaft
 
     @JsonProperty("request")
