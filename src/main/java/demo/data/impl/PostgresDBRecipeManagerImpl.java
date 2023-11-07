@@ -40,7 +40,7 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
     public List<Recipe> readAllRecipes() {
 
         final Logger readTaskLogger = Logger.getLogger("ReadListLogger");
-        readTaskLogger.log(Level.INFO, "Start reading shoppingList ");
+        readTaskLogger.log(Level.INFO, "Start reading Recipes ");
 
         List<Recipe> recipes = new ArrayList<>();
         Statement stmt = null;
@@ -73,7 +73,7 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             e.printStackTrace();
         }
 
-        return null;
+        return recipes;
     }
 
     @Override
