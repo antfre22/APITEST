@@ -134,11 +134,10 @@ public class MappingController {
     public UserList getAllUsers(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController /user/all ");
-            //Step 1: Check admin Rechte
-            //Step 2: fetch data from DB
+            //Step 1: fetch data from DB
         List<User> usersfromDB = userManager.readAllUsers();
         List<demo.model.User> myUsers = new ArrayList<>();
-            //Step 3: Ausgabe einer Liste mit den Usern und ihren Daten
+            //Step 2: Ausgabe einer Liste mit den Usern und ihren Daten
         for(User user : usersfromDB) {
             myUsers.add(new demo.model.User(user.getEmail(),user.getPasswort(),
                     user.getLastName(), user.getFirstName(), user.getToken()));

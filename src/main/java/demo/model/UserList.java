@@ -42,5 +42,4 @@ public class UserList {
 
         this.additionalProperties.put(name, value);
     }
-
 }
