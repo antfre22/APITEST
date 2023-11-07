@@ -217,17 +217,10 @@ public class MappingController {
         //Step 2: delete shopping List in der DB
         return "shoppingList got deleted";
     }
-    @DeleteMapping("/shoppinglist/ingredient")
-    public String deleteIngredient(@RequestParam int ingredient) {
-        //Step 1: Check Token
-        listManager.deleteIngredient(ingredient);
-        //Step 2: delete specific ingredient from shopping List in der DB
-        return "We deleted the following ingredient: " +  ingredient ;
-    }
 
     @DeleteMapping("/shoppinglist/ingredientzwei")
-    public String deleteIngredientzwei(@RequestBody TokenIngredient ingredient) {
-        listManager.deleteIngredientZwei(ingredient.getIngredients().getName());
+    public String deleteIngredient(@RequestBody TokenIngredient ingredient) {
+        listManager.deleteIngredient(ingredient.getIngredients().getName());
         return "Following Ingredient deleted: " + ingredient.getIngredients().getName() ;
     }
 

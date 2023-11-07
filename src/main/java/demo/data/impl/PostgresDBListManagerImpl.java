@@ -132,42 +132,10 @@ public class PostgresDBListManagerImpl implements ListManager {
 
     }
 
-//Test
-
-    @Override
-    public void deleteIngredient(int ingredient) {
-        Statement stmt = null;
-        Connection connection = null;
-
-        final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
-        deleteIngredientsLogger.log(Level.INFO, "Start deleting ingredient at id= " + ingredient);
-
-
-        try {
-            connection = basicDataSource.getConnection();
-            stmt = connection.createStatement();
-
-
-            String deleteSQL = "DELETE FROM shoppingList WHERE Shoplistid = " + ingredient;
-
-            stmt.executeUpdate(deleteSQL);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     //Delete Ingredient Neu
 
     @Override
-    public void deleteIngredientZwei(String ingredient) {
+    public void deleteIngredient(String ingredient) {
 
 
         final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
