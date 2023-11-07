@@ -34,9 +34,9 @@ public class PostgresDBListManagerImpl implements ListManager {
         return postgresDBListManager;
     }
 
-
     @Override
     public List<Ingredients> readAllIngredients() {
+
         final Logger readTaskLogger = Logger.getLogger("ReadListLogger");
         readTaskLogger.log(Level.INFO, "Start reading shoppingList ");
 
@@ -57,17 +57,18 @@ public class PostgresDBListManagerImpl implements ListManager {
                         )
                 );
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
         try {
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
-
         return ingredients;
     }
 
@@ -91,27 +92,27 @@ public class PostgresDBListManagerImpl implements ListManager {
 
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         try {
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void createListTable() {
+
         Statement stmt = null;
         Connection connection = null;
 
         try {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
-
-            // String dropTable = "DROP TABLE tasks";
-            // stmt.executeUpdate(dropTable);
 
             String createTable = "CREATE TABLE shoppingList (" +
                     "Shoplistid SERIAL PRIMARY KEY" +
@@ -120,27 +121,25 @@ public class PostgresDBListManagerImpl implements ListManager {
 
             stmt.executeUpdate(createTable);
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         try {
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
-    //Delete Ingredient Neu
-
     @Override
     public void deleteIngredient(String ingredient) {
 
-
         final Logger deleteIngredientsLogger = Logger.getLogger("DeleteIngredientsLogger");
         deleteIngredientsLogger.log(Level.INFO, "Start deleting ingredient at name= " + ingredient);
-
 
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -154,18 +153,19 @@ public class PostgresDBListManagerImpl implements ListManager {
             stmt = connection.prepareStatement(deleteSQL);
             stmt.setString(1, ingredient);
 
-
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 deleteIngredientsLogger.info("Deleted successfully.");
-
-            } else {
+            }
+            else {
                 deleteIngredientsLogger.warning("Zutat nicht da.");
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
+        }
+        finally {
             // Close resources (stmt, connection) and handle exceptions if needed.
             try {
                 if (stmt != null) {
@@ -178,6 +178,5 @@ public class PostgresDBListManagerImpl implements ListManager {
                 throw new RuntimeException(e);
             }
         }
-
     }
 }

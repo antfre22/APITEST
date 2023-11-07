@@ -7,6 +7,5 @@ public interface Ingredients {
 
     float getQuantity();
 
-
     void setQuantity(float quantity);
 }

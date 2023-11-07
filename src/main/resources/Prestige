@@ -26,7 +26,7 @@ GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/create-user-
 
 
 ###
-DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredientzwei
+DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient
 Content-Type: application/json
 
 {

@@ -5,6 +5,7 @@ import demo.data.api.Ingredients;
 public class IngredientsImpl implements Ingredients {
 
     String name;
+
     float quantity;
 
     public IngredientsImpl(String name, float quantity) {
@@ -21,7 +22,6 @@ public class IngredientsImpl implements Ingredients {
         this.name = name;
     }
 
-
     public float getQuantity(){
         return quantity;
     }
@@ -30,6 +30,4 @@ public class IngredientsImpl implements Ingredients {
     public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
-
-
 }

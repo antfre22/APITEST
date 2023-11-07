@@ -1,6 +1,5 @@
 package demo;
 
-
 import demo.data.api.*;
 import demo.data.api.Ingredients;
 import demo.data.api.ListManager;
@@ -21,28 +20,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1.0")
 public class MappingController {
 
-    //sehr wichtig, nach API First Prinzip hier vorzugehen
-    //Testen der HTTP:Resquest mit Prestige.dev und den passenden URL und HTTP-Aufrufe
-    //folgender UserManager legt die User in der DB an und bearbeitet ihre Daten
-    //UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
     UserManager userManager = PostgresDBUserManagerImpl.getPostgresDBUserManagerImpl();
+
     ListManager listManager = PostgresDBListManagerImpl.getPostgresDBListManagerImpl();
 
-    RecipeManager recipeManager = PostgresDBRecipeManagerImpl.getPostgresDBRecipeManagerImpl();//evtl. noch ein shoppingListManager der sich um alles mit der ShoppingList kümmert
-    //ähnlich dem Prinzip von Hartwig mit TaskManager
+    RecipeManager recipeManager = PostgresDBRecipeManagerImpl.getPostgresDBRecipeManagerImpl();
 
     /*
      GET-Methode
       für Basic-Abfrage ob Server "alive" ist
      */
     @GetMapping("/auth")
-
     public String getInfo(@RequestParam(value = "name", defaultValue = "User") String name) {
         Logger.getLogger("MappingController").log(Level.INFO, "MappingController auth " + name);
         return "im alive guys";
@@ -52,7 +45,6 @@ public class MappingController {
      Post-Methode
       fuer den Login eines Users in das System
      */
-
     @PostMapping(
             path = ("/auth/login"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
@@ -62,9 +54,11 @@ public class MappingController {
         //To-do: Check Verification of the token
         // Step 1: Check Token des User
       return  userManager.Login(user.getEmail(), user.getPasswort());
-      //  return new SendBackToken("jhnaosvgioa gvi", 67978)
     }
 
+    /*
+    DELETE-Methode fuer den Logout eines Users im System
+     */
     @DeleteMapping(
             path = ("/auth/logoff"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
@@ -76,7 +70,7 @@ public class MappingController {
     }
 
     /*
-     POST-Methode, die es ermoeglicht das der User sich
+     POST-Methode, die es ermoeglicht, dass der User sich
      einmalig im System registrieren kann
      */
     @PostMapping(
@@ -88,34 +82,26 @@ public class MappingController {
 
         String rs = userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(), TokenUser.getUser().getUserPassword(), TokenUser.getUser().getUserEmail());
 
-    //    return new SendBackToken("uavoiggpvagiv", 360);
         return rs;
     }
 
     /*
-     GET-Methode, die es ermöglicht das der User
-     seine Daten zurückbekommt
+     GET-Methode, die es ermoeglicht, dass alle User ausgegeben werden
      */
-
-    //Request-Param einzelne Parameter JSON
-
-    //Request-Body - alles
-
     @GetMapping("/user")
     public User getUserData(@RequestParam(value = "token", defaultValue = "no-token") String token){
         //Step 1: Check Token to the requested Data
         //Step 2: fetch data from DB
-        //noch zu impeln
+        //noch zu implementieren in der Zukunft
         //List<User> myUsers = userManager.readAllUsers();
-
         //Step 3: Ausgabe der Daten des Users
         return null;
     }
 
     /*
- DELETE-Methode, die es ermoeglicht das
- der Nutzer seinen Account loeschen kann
- */
+    DELETE-Methode, die es ermoeglicht, dass
+    der Nutzer seinen Account loeschen kann
+    */
     @DeleteMapping(
             path = ("/user"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
@@ -123,15 +109,17 @@ public class MappingController {
     public String deleteUser() {
         //Step 1: Check Token
         //Step 2: delete data in the DB from table users
+        //Noch zu implementieren in der Zukunft
         return "User got deleted with the following name: Test";
     }
 
     /*
- GET-Methode, die es ermöglicht das der Admin
- alle User mit ihren Daten angezeigt bekommt
- */
+    GET-Methode, die es ermoeglicht, dass der Admin
+    alle User mit ihren Daten angezeigt bekommt
+    */
     @GetMapping("/user/all")
     public UserList getAllUsers(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController /user/all ");
             //Step 1: fetch data from DB
@@ -143,30 +131,12 @@ public class MappingController {
                     user.getLastName(), user.getFirstName(), user.getToken()));
         }
         return new UserList(myUsers);
- /*       {
-            "users": [
-            {
-                "userEmail": "fef",
-                    "userPassword": null,
-                    "lastName": null,
-                    "firstName": null,
-                    "token": "logged-off"
-            },
-            {
-                "userEmail": "fefgjngjdjgd",
-                    "userPassword": null,
-                    "lastName": null,
-                    "firstName": null,
-                    "token": "logged-off"
-            }
-  ] Ausgabe muss noch noch richtig gemaxht werden
-        } */
     }
+
     /*
-    GET-Methode, die dem Nutzer ermöglicht seine aktuelle
+    GET-Methode, die dem Nutzer ermoeglicht, seine aktuelle
     Einkaufsliste angezeigt zu bekommen
      */
-
    @GetMapping("/shoppinglist")
     public ShoppingList getShoppingList(@RequestParam(value = "token", defaultValue = "no-token") String token) {
 
@@ -174,16 +144,16 @@ public class MappingController {
                 .log(Level.INFO,"MappingController /ingredients/all ");
         //Step 1: Check Token
         //Step 2: fetch shoppingList from DB
-      List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
-       List<demo.model.Ingredients> myIngredients = new ArrayList<>();
-       for (demo.data.api.Ingredients t : ingredientsFromFile)
-           myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
+        List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
+        List<demo.model.Ingredients> myIngredients = new ArrayList<>();
+        for (demo.data.api.Ingredients t : ingredientsFromFile)
+            myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
         // Step 3: Ausgabe analog Hartwig Tasks
-       return new ShoppingList(myIngredients);
+        return new ShoppingList(myIngredients);
     }
 
     /*
-    Post-Methode, die dem Nutzer ermöglicht seine
+    Post-Methode, die dem Nutzer ermoeglicht, seine
     Einkaufsliste mit Zutaten zu füllen
      */
     @PostMapping(
@@ -197,15 +167,15 @@ public class MappingController {
         //analog zu addATask von Hartwig
         //Step 1: Check Token
         //Step 2: fetch shopping List von DB
-        //Step 3: Add Ingredient zu der Shopping List
+        //Step 3: Add Ingredient zur Shopping List
         listManager.addIngredients(tokenIngredient.getIngredients().getName(), tokenIngredient.getIngredients().getQuantity());
         //Step 4: send back shoppingList zu DB
         return "You added: " + tokenIngredient.getIngredients().getName() + " to your List! ";
     }
 
     /*
-    Delete-Methode, die dem Nutzer ermöglicht seine
-    Einkaufsliste zu löschen
+    Delete-Methode, die dem Nutzer ermoeglicht, seine
+    Einkaufsliste zu loeschen
      */
     @DeleteMapping(
             path = ("/shoppinglist"),
@@ -213,31 +183,44 @@ public class MappingController {
     )
     public String deleteShoppinglist() {
         //Step 1: Check Token
-
         //Step 2: delete shopping List in der DB
+        //noch zu implementieren in der Zukunft
         return "shoppingList got deleted";
     }
 
-    @DeleteMapping("/shoppinglist/ingredientzwei")
+    /*
+    Delete-Methode, die dem Nutzer ermoeglicht, Zutaten aus der
+    Einkaufsliste zu loeschen
+     */
+    @DeleteMapping("/shoppinglist/ingredient")
     public String deleteIngredient(@RequestBody TokenIngredient ingredient) {
+
         listManager.deleteIngredient(ingredient.getIngredients().getName());
         return "Following Ingredient deleted: " + ingredient.getIngredients().getName() ;
     }
 
+    /*
+    Post-Methode, die Rezepte in der Datenbank ablegt, damit diese
+    im Kalender gespeichert bleiben
+     */
     @PostMapping(
             path = ("/recipes"),
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public String saveRecipeInDB(@RequestBody TokenRecipe tokenRecipe){
+
         Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /recipes "
                 + tokenRecipe.getRecipe().getName());
 
             recipeManager.addRecipes(tokenRecipe.getRecipe().getName(),tokenRecipe.getRecipe().getDate());
 
-        return "Succesfull add of recipe: " + tokenRecipe.getRecipe().getName() +
+        return "Successful add of recipe: " + tokenRecipe.getRecipe().getName() +
                 " and Date: " + tokenRecipe.getRecipe().getDate();
     }
 
+    /*
+    Get-Methode, um sich die Rezepte auszugeben
+     */
     @GetMapping("/recipes")
     public RecipeList getRecipes(@RequestParam(value = "token", defaultValue = "no-token") String token) {
 
@@ -253,48 +236,53 @@ public class MappingController {
         return new RecipeList(myRecipes);
     }
 
+    /*
+    Delete-Methode, um die Rezepte aus der Datenbank zu loeschen
+     */
     @DeleteMapping("/recipes")
     public String deleteRecipe(@RequestBody TokenRecipe recipe) {
+
         recipeManager.deleteRecipe(recipe.getRecipe().getName(), recipe.getRecipe().getDate());
         return "Following recipe deleted: " + recipe.getRecipe().getName() + " on date: " +  recipe.getRecipe().getDate();
     }
 
+    /*
+    Get-Methode, um Einkaufslistentabelle zu erstellen
+     */
     @GetMapping("/create-list-table")
     public String createDBTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController create-list-table " + token);
 
-        // Check token
-
         listManager.createListTable();
-
         return "ok";
     }
 
-    //test1234
-
+    /*
+    Get-Methode, um User-Tabelle zu erstellen
+     */
     @GetMapping("/create-user-table")
     public String createUserTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController create-user-table " + token);
 
-        // Check token
-
         userManager.createUserTable();
-
         return "UserTabelle erstellt";
     }
+
+    /*
+    Get-Methode, um Rezept-Tabelle zu erstellen
+     */
     @GetMapping("/create-recipes-table")
     public String createRecipeTable(@RequestParam(value = "token", defaultValue = "no-token") String token) {
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController create-recipes-table " + token);
 
         recipeManager.createRecipeTable();
-
         return "RezeptTabelle erstellt";
     }
 
-    //Alexa
+    //Alexa Implementation ab hier
 
     private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
 
@@ -309,12 +297,15 @@ public class MappingController {
         return alexaRO;
     }
 
-    //TestAlexa
+    /*
+    Post-Methode, damit Alexa den ReadAllIngredientsIntent ausfuehrt, und die Einkaufsliste ausgibt
+     */
     @PostMapping(
             path = "/alexa",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public AlexaRO sendShoppingListToAlexa(@RequestBody AlexaRO alexaRO, TokenIngredient tokenIngredient) {
+    public AlexaRO sendShoppingListToAlexa(@RequestBody AlexaRO alexaRO) {
+
         Logger.getLogger("MappingController").log(Level.INFO,"MappingController POST /alexa ");
         String outText = "";
 
@@ -334,12 +325,6 @@ public class MappingController {
                 i++;
             }
         }
-
-
-        //test
-        return
-                prepareResponse(alexaRO, outText, false);
+        return prepareResponse(alexaRO, outText, false);
     }
-
-
 }

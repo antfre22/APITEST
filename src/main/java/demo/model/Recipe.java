@@ -9,9 +9,8 @@ import java.util.Map;
 import java.util.Date;
 
 public class Recipe {
+
     private String name = "";
-
-
 
     private Date date = new Date();
 
@@ -26,14 +25,13 @@ public class Recipe {
     }
 
     public String getName() {
-
         return name;
     }
 
     public void setName(String name) {
-
         this.name = name;
     }
+
     public Date getDate() {
         return date;
     }
@@ -41,6 +39,7 @@ public class Recipe {
     public void setDate(Date date) {
         this.date = date;
     }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -50,5 +49,4 @@ public class Recipe {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }
