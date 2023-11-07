@@ -351,25 +351,7 @@ public class MappingController {
                 i++;
             }
         }
-        else if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest")
-                &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("AddIngredient"))
-        ){
-            String ingredientName = AlexaRequestParser.getSlotValue(alexaRO.getJsonRequest(), "Ingredient");
 
-
-            String ingredientQuantity = AlexaRequestParser.getSlotValue(alexaRO.getJsonRequest(), "Quantity");
-
-            if (ingredientName != null && ingredientQuantity != null) {
-                // Fügen Sie das Ingredient zur Einkaufsliste hinzu
-                listManager.addIngredients(ingredientName, Integer.parseInt(ingredientQuantity));
-                outText += "Added " + ingredientName + " with quantity " + ingredientQuantity + " to your shopping list. ";
-            } else {
-                outText += "I'm sorry, I couldn't understand the ingredient information. Please try again.";
-            }
-            // Optionally, you can provide a confirmation message here
-            outText += "I've added " + ingredientName + " with quantity " + ingredientQuantity + " to your shopping list. ";
-        }
 
         //test
         return

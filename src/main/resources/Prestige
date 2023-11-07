@@ -26,7 +26,15 @@ GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/create-user-
 
 
 ###
-DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient?ingredient=6
+DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredientzwei
+Content-Type: application/json
+
+{
+"token" : "123",
+"ingredients" : {
+	"name" : "schinken"
+	}
+}
 
 
 ###
