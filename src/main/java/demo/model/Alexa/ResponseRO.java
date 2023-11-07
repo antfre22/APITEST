@@ -19,6 +19,11 @@ public class ResponseRO {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
+    public ResponseRO()
+    {
+        super();
+    }
+
     public ResponseRO(OutputSpeechRO outputSpeech, Boolean shouldEndSession)
     {
         super();

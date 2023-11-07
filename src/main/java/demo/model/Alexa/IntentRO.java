@@ -16,6 +16,11 @@ public class IntentRO {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
+    public IntentRO()
+    {
+        super();
+    }
+
     public IntentRO(String name) {
         super();
         this.name = name;

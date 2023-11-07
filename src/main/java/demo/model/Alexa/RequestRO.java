@@ -28,6 +28,11 @@ public class RequestRO {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
+    public RequestRO()
+    {
+        super();
+    }
+
     public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp)
     {
         super();
