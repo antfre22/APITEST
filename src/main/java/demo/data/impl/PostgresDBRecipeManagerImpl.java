@@ -1,16 +1,15 @@
 package demo.data.impl;
+import demo.data.api.Ingredients;
 import demo.data.api.Recipe;
 import demo.data.api.RecipeManager;
 import org.apache.commons.dbcp.BasicDataSource;
+
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
@@ -39,6 +38,40 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
 
     @Override
     public List<Recipe> readAllRecipes() {
+
+        final Logger readTaskLogger = Logger.getLogger("ReadListLogger");
+        readTaskLogger.log(Level.INFO, "Start reading shoppingList ");
+
+        List<Recipe> recipes = new ArrayList<>();
+        Statement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM recipes");
+
+            while (rs.next()) {
+                java.sql.Date sqlDate = rs.getDate("datum");
+                java.util.Date recipeDate = new java.util.Date(sqlDate.getTime());
+
+                recipes.add(
+                        new RecipeImpl(
+                                rs.getString("recipeName"),
+                                recipeDate
+                        )
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return null;
     }
@@ -72,6 +105,53 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    @Override
+    public void deleteRecipe(String name, Date date) {
+
+
+        final Logger deleteRecipeLogger = Logger.getLogger("DeleteRecipeLogger");
+        deleteRecipeLogger.log(Level.INFO, "Start deleting recipe at name= " + name);
+
+
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try {
+            connection = basicDataSource.getConnection();
+            deleteRecipeLogger.info("Connection erfolgreich");
+
+
+            String deleteSQL = "DELETE FROM recipes WHERE recipeName = ? AND datum = ? ;";
+            stmt = connection.prepareStatement(deleteSQL);
+            stmt.setString(1, name);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            stmt.setDate(2, sqlDate);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+
+                deleteRecipeLogger.info("Deleted successfully.");
+
+            }
+            else {
+                deleteRecipeLogger.warning("Rezept nicht da.");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -8,6 +8,11 @@ public class RecipeImpl implements Recipe{
     String recipeName;
     Date recipeDate;
 
+    public RecipeImpl(String recipeName, Date recipeDate){
+        this.recipeName = recipeName;
+        this.recipeDate = recipeDate;
+    }
+
     @Override
     public String getRecipeName() {
         return recipeName;

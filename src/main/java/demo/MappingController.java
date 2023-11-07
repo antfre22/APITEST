@@ -12,6 +12,7 @@ import demo.model.Alexa.AlexaRO;
 import demo.model.Alexa.AlexaRequestParser;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
+import demo.model.Recipe;
 import demo.model.ShoppingList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -252,6 +253,27 @@ public class MappingController {
 
         return "Succesfull add of recipe: " + tokenRecipe.getRecipe().getName() +
                 " and Date: " + tokenRecipe.getRecipe().getDate();
+    }
+
+    @GetMapping("/recipes")
+    public RecipeList getRecipes(@RequestParam(value = "token", defaultValue = "no-token") String token) {
+
+        Logger.getLogger("MappingController")
+                .log(Level.INFO,"MappingController /recipes ");
+        //Step 1: Check Token
+        //Step 2: fetch shoppingList from DB
+        List <demo.data.api.Recipe> recipesFromFile = recipeManager.readAllRecipes();
+        List<demo.model.Recipe> myRecipes = new ArrayList<>();
+        for (demo.data.api.Recipe t : recipesFromFile)
+            myRecipes.add(new demo.model.Recipe(t.getRecipeName(),t.getDate()));
+        // Step 3: Ausgabe analog Hartwig Tasks
+        return new RecipeList(myRecipes);
+    }
+
+    @DeleteMapping("/recipes")
+    public String deleteRecipe(@RequestBody TokenRecipe recipe) {
+        recipeManager.deleteRecipe(recipe.getRecipe().getName(), recipe.getRecipe().getDate());
+        return "Following recipe deleted: " + recipe.getRecipe().getName() + " on date: " +  recipe.getRecipe().getDate();
     }
 
     @GetMapping("/create-list-table")
