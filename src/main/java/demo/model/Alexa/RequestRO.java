@@ -5,29 +5,28 @@ import com.fasterxml.jackson.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @JsonTypeName(value = RequestRO.TYPENAME)
-public class RequestRO
-{
+public class RequestRO {
+
     protected final static String TYPENAME = "RequestRO";
 
     @JsonProperty("type")
     private String type;
+
     @JsonProperty("requestId")
     private String requestId;
+
     @JsonProperty("intent")
     private IntentRO intent;
+
     @JsonProperty("locale")
     private String locale;
+
     @JsonProperty("timestamp")
     private String timestamp;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
-
-    public RequestRO()
-    {
-        super();
-    }
 
     public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp)
     {
@@ -98,5 +97,4 @@ public class RequestRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }

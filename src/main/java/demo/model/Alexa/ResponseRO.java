@@ -6,21 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @JsonTypeName(value = ResponseRO.TYPENAME)
-public class ResponseRO
-{
+public class ResponseRO {
+
     protected final static String TYPENAME = "ResponseRO";
 
     @JsonProperty("outputSpeech")
     private OutputSpeechRO outputSpeech;
+
     @JsonProperty("shouldEndSession")
     private Boolean shouldEndSession;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
-
-    public ResponseRO()
-    {
-        super();
-    }
 
     public ResponseRO(OutputSpeechRO outputSpeech, Boolean shouldEndSession)
     {

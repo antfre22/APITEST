@@ -9,23 +9,14 @@ import demo.data.impl.*;
 
 import demo.model.*;
 import demo.model.Alexa.AlexaRO;
-import demo.model.Alexa.AlexaRequestParser;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
-import demo.model.Recipe;
 import demo.model.ShoppingList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import demo.data.impl.PropertyFileUserManagerImpl;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

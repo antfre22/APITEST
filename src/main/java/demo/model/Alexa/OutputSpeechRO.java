@@ -6,14 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @JsonTypeName(value = OutputSpeechRO.TYPENAME)
-public class OutputSpeechRO
-{
+public class OutputSpeechRO {
+
     protected final static String TYPENAME = "IntentRO";
 
     @JsonProperty("type")
     private String type;
+
     @JsonProperty("text")
     private String text;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -58,5 +60,4 @@ public class OutputSpeechRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }

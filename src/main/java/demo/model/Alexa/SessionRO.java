@@ -8,10 +8,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @JsonTypeName(value = SessionRO.TYPENAME)
-public class SessionRO
-{
+public class SessionRO {
+
     protected final static String TYPENAME = "SessionRO";
 
     @JsonIgnore
@@ -31,5 +30,4 @@ public class SessionRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }

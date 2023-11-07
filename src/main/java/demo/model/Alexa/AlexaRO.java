@@ -1,59 +1,40 @@
 package demo.model.Alexa;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @JsonRootName(value = "TaskListRO")
-public class AlexaRO
-{
+public class AlexaRO {
+
     protected final static String TYPENAME = "Alexa";
 
     @JsonProperty("request")
     private RequestRO request;
+
     @JsonProperty("response")
     private ResponseRO response;
+
     @JsonProperty("version")
     private String version;
 
     @JsonProperty("session")
     private SessionRO session;
+
     @JsonProperty("context")
     private ContextRO context;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public AlexaRO()
-    {
-        super();
-    }
-
-    public AlexaRO(String version)
-    {
-        super();
-    }
-    @JsonProperty("request")
-    private JsonNode Jsonrequest;
-
     // Getter und Setter für die 'request' Eigenschaft
-
-    public JsonNode getJsonRequest() {
-        return Jsonrequest;
-    }
-
-    public void setJsonRequest(JsonNode Jsonrequest) {
-        this.Jsonrequest = Jsonrequest;
-    }
 
     @JsonProperty("request")
     public RequestRO getRequest() {
         return request;
     }
 
-    @JsonProperty("request")
+   @JsonProperty("request")
     public void setRequest(RequestRO request) {
         this.request = request;
     }
@@ -77,6 +58,7 @@ public class AlexaRO
     public void setVersion(String version) {
         this.version = version;
     }
+
     @JsonProperty("session")
     public SessionRO getSession() {
         return session;
@@ -86,7 +68,8 @@ public class AlexaRO
     public void setSession(SessionRO session) {
         this.session = session;
     }
-    @JsonProperty("context")
+
+   @JsonProperty("context")
     public ContextRO getContext() {
         return context;
     }
@@ -105,14 +88,4 @@ public class AlexaRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }
-
-
-// @JsonRawValue public String version;
-// private String version;
-// private boolean shouldEndSession;
-// private String outputSpeech;
-
-
-

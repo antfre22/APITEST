@@ -4,15 +4,12 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 @JsonTypeName(value = ContextRO.TYPENAME)
-public class ContextRO
-{
+public class ContextRO {
+
     protected final static String TYPENAME = "ContextRO";
 
     @JsonIgnore
@@ -32,6 +29,5 @@ public class ContextRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }
 
