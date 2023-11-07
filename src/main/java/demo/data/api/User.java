@@ -1,8 +1,5 @@
 package demo.data.api;
 
-//Interface zum Speichern der User-Daten
-//Uebernommen vom Hartiwg
-
 public interface User {
 
     String getFirstName();
@@ -22,6 +19,6 @@ public interface User {
     String setEmail(String email);
 
     String getToken();
-    //Wie lange Token gueltig?
+
     float getValidUntil();
 }

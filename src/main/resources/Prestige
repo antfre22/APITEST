@@ -1,13 +1,17 @@
 https://prestige.dev/
 ###
+Create shopping list
+
 GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/create-list-table
 
-
 ###
+Get shopping list
+
 GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist
 
-
 ###
+Add Ingredient to shopping list
+
 POST  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist
 Content-Type: application/json
 
@@ -17,16 +21,17 @@ Content-Type: application/json
     "name": "ham",
     "quantity": 3
    }
-
 }
 
-
 ###
+Get User-Table
+
 GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/create-user-table
 
-
 ###
-DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredientzwei
+Delete Ingredient
+
+DELETE  https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient
 Content-Type: application/json
 
 {
@@ -36,16 +41,10 @@ Content-Type: application/json
 	}
 }
 
-
 ###
-DELETE https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/shoppinglist/ingredient?ingredients=test
+Get all Users
 
-
-###
 GET https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/user/all
-
-
-
 
 ###
 Create User
@@ -63,11 +62,8 @@ Content-Type: application/json
    }
 }
 
-
-
-
 ###
-User Login
+Login User
 
 POST https://hidden-sierra-69971-16d83e153d07.herokuapp.com/api/v1.0/auth/login
 Content-Type: application/json
@@ -76,12 +72,6 @@ Content-Type: application/json
     "email": "r@r",
     "password": "fef"
 }
-
-
-
-
-
-
 
 ###
 User Logout

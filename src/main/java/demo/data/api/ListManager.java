@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface ListManager {
     List<Ingredients> readAllIngredients();
+
     void addIngredients(String name, float quantity);
+
      void createListTable();
-     void deleteIngredient(int ingredient);
 
-
-    void deleteIngredientZwei(String Ingredient);
+    void deleteIngredient(String Ingredient);
 }

@@ -1,22 +1,16 @@
 package demo.data.impl;
 
-import demo.data.api.Ingredients;
 import demo.data.api.UserManager;
 import demo.data.api.User;
 import org.apache.commons.dbcp.BasicDataSource;
 
-import javax.swing.plaf.nimbus.State;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class PostgresDBUserManagerImpl implements UserManager {
     String databaseURL = "jdbc:postgresql://ec2-52-1-92-133.compute-1.amazonaws.com:5432/dbq8q1o8ump5db";
     String username = "qkmdiqnoiwgfyj";
@@ -27,18 +21,18 @@ public class PostgresDBUserManagerImpl implements UserManager {
         return UUID.randomUUID().toString();
     }
 
-
-    //74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff
     BasicDataSource basicDataSource;
 
     // Singleton
     static PostgresDBUserManagerImpl postgresDBUserManager = null;
+
     private PostgresDBUserManagerImpl() {
         basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(databaseURL);
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(dbpassword);
     }
+
     public static PostgresDBUserManagerImpl getPostgresDBUserManagerImpl() {
         if (postgresDBUserManager == null)
             postgresDBUserManager = new PostgresDBUserManagerImpl();
@@ -47,7 +41,6 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
     public void createUserTable() {
 
-        //  It deletes data if table already exists.
         Statement stmt = null;
         Connection connection = null;
 
@@ -76,13 +69,12 @@ public class PostgresDBUserManagerImpl implements UserManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public String Login(String Email, String Password)
-    {
+    public String Login(String Email, String Password) {
+
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
-        readTaskLogger.log(Level.INFO,"Start authentification of the User");
+        readTaskLogger.log(Level.INFO, "Start authentification of the User");
 
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -100,24 +92,22 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
             rs = stmt.executeQuery();
 
-            if (rs.next())
-            {
+            if (rs.next()) {
                 readTaskLogger.info("User found in database");
-               String token = tokenGenerator();
+                String token = tokenGenerator();
 
-               Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+                Timestamp validUntil = new Timestamp(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
 
+                String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?;";
 
-               String updateSQL = "UPDATE users SET token = ?, validuntil = ? WHERE email = ?;";
-               PreparedStatement newStmt = connection.prepareStatement(updateSQL);
-               newStmt.setString(1, token);
-               newStmt.setTimestamp(2, validUntil);
-               newStmt.setString(3, Email);
-               newStmt.executeUpdate();
-               return token;
-            }
-            else
-            {
+                PreparedStatement newStmt = connection.prepareStatement(updateSQL);
+                newStmt.setString(1, token);
+                newStmt.setTimestamp(2, validUntil);
+                newStmt.setString(3, Email);
+
+                newStmt.executeUpdate();
+                return token;
+            } else {
                 readTaskLogger.warning("No user Found");
                 return null;
             }
@@ -125,18 +115,16 @@ public class PostgresDBUserManagerImpl implements UserManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
     }
 
     public String Logout(String Email) {
+
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
         readTaskLogger.log(Level.INFO, "Start authentification of the User");
 
         Connection connection = null;
         PreparedStatement stmt = null;
+
         try {
             connection = basicDataSource.getConnection();
             readTaskLogger.info("Connection established.");
@@ -171,10 +159,10 @@ public class PostgresDBUserManagerImpl implements UserManager {
         return "nicht funktioniert";
     }
 
-    public List<User> readAllUsers(){
+    public List<User> readAllUsers() {
 
         final Logger readTaskLogger = Logger.getLogger("ReadUserLogger");
-        readTaskLogger.log(Level.INFO,"Start reading List of Users");
+        readTaskLogger.log(Level.INFO, "Start reading List of Users");
 
         List<User> myUsers = new ArrayList<>();
         Statement stmt = null;
@@ -195,7 +183,7 @@ public class PostgresDBUserManagerImpl implements UserManager {
                                 rs.getString("password"),
                                 rs.getString("email"),
                                 rs.getString("token")
-                                 )
+                        )
                 );
             }
         } catch (SQLException e) {
@@ -208,13 +196,13 @@ public class PostgresDBUserManagerImpl implements UserManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return myUsers;
     }
-    public String createUser(String firstName, String lastName, String userPassword, String email){
+
+    public String createUser(String firstName, String lastName, String userPassword, String email) {
 
         final Logger createTaskLogger = Logger.getLogger("CreateUserLogger");
-        createTaskLogger.log(Level.INFO,"Start creating user: " + firstName);
+        createTaskLogger.log(Level.INFO, "Start creating user: " + firstName);
 
         Statement stmt = null;
         Connection connection = null;
@@ -234,18 +222,9 @@ public class PostgresDBUserManagerImpl implements UserManager {
 
             stmt.close();
             connection.close();
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return "Added User with name: " + firstName + " and email:  " + email ;
+        return "Added User with name: " + firstName + " and email:  " + email;
     }
-
-    public String getEmailForToken(String token){
-
-        return "hello";
-    }
-
 }

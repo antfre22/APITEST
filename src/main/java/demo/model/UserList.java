@@ -17,15 +17,12 @@ public class UserList {
     public UserList() { }
 
     public UserList(Collection<User> users) {
-
         this.users = users;
     }
 
     public Collection<User> getUsers() {
-
         return users;
     }
-
 
     public void setUsers(Collection<User> users) {
         this.users = users;
@@ -33,13 +30,11 @@ public class UserList {
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
-
         return this.additionalProperties;
     }
 
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
-
         this.additionalProperties.put(name, value);
     }
 }

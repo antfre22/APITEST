@@ -11,6 +11,7 @@ import java.util.Map;
 public class ShoppingList {
 
     private Collection<demo.model.Ingredients> Ingredient;
+
     private String name;
 
     @JsonIgnore
@@ -34,9 +35,6 @@ public class ShoppingList {
         return name;
     }
 
-
-
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -46,7 +44,7 @@ public class ShoppingList {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-    }
+}
 
 
 

@@ -1,6 +1,5 @@
 package demo.model;
 
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,11 +10,14 @@ import java.util.Map;
 public class User {
 
     private String userEmail = "";
-    private String userPassword = "";
-    private String lastName = "";
-    private String firstName = "";
-    private String token = "";
 
+    private String userPassword = "";
+
+    private String lastName = "";
+
+    private String firstName = "";
+
+    private String token = "";
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -53,22 +55,18 @@ public class User {
     }
 
     public String getUserEmail() {
-
         return userEmail;
     }
 
     public void setUserEmail(String userEmail) {
-
         this.userEmail = userEmail;
     }
 
     public String getUserPassword() {
-
         return userPassword;
     }
 
     public void setUserPassword(String userPassword) {
-
         this.userPassword = userPassword;
     }
 
@@ -81,7 +79,5 @@ public class User {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
-
 }
 

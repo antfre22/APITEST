@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class TokenIngredient {
 
     private String token;
+
     private Ingredients ingredients;
 
     @JsonIgnore
@@ -41,13 +41,11 @@ public class TokenIngredient {
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
-
         return this.additionalProperties;
     }
 
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
-
         this.additionalProperties.put(name, value);
     }
 }

@@ -1,5 +1,5 @@
 package demo.data.impl;
-import demo.data.api.Ingredients;
+
 import demo.data.api.Recipe;
 import demo.data.api.RecipeManager;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -7,12 +7,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.*;
 import java.util.Date;
 import java.util.List;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Properties;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +17,9 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
     String password = "74fa1789b3b99e9a4ce0877b688e5aea90eea02573ceb014fff0eac7ccb9b2ff";
 
     BasicDataSource basicDataSource;
+
     static PostgresDBRecipeManagerImpl postgresDBRecipeManager = null;
+
     private PostgresDBRecipeManagerImpl() {
         basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(databaseURL);
@@ -34,7 +31,6 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             postgresDBRecipeManager = new PostgresDBRecipeManagerImpl();
         return postgresDBRecipeManager;
     }
-
 
     @Override
     public List<Recipe> readAllRecipes() {
@@ -63,22 +59,24 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
                         )
                 );
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
         try {
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
-
         return recipes;
     }
 
     @Override
     public void addRecipes(String recipeName, Date datum) {
+
         final Logger createRecipeLogger = Logger.getLogger("AddRecipeLogger");
         createRecipeLogger.log(Level.INFO,"Start adding recipe " + recipeName);
 
@@ -98,23 +96,24 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
 
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         try {
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void deleteRecipe(String name, Date date) {
 
-
         final Logger deleteRecipeLogger = Logger.getLogger("DeleteRecipeLogger");
         deleteRecipeLogger.log(Level.INFO, "Start deleting recipe at name= " + name);
-
 
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -141,7 +140,8 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
                 deleteRecipeLogger.warning("Rezept nicht da.");
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
@@ -151,13 +151,15 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
             if (connection != null) {
                 connection.close();
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public void createRecipeTable() {
+
         Statement stmt = null;
         Connection connection = null;
 
@@ -173,15 +175,16 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
 
             stmt.executeUpdate(createTable);
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         try {
             stmt.close();
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

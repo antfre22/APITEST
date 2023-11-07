@@ -172,13 +172,13 @@ public class MappingController {
 
         Logger.getLogger("MappingController")
                 .log(Level.INFO,"MappingController /ingredients/all ");
-
-        //Step 1: fetch shoppingList from DB
+        //Step 1: Check Token
+        //Step 2: fetch shoppingList from DB
       List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
        List<demo.model.Ingredients> myIngredients = new ArrayList<>();
        for (demo.data.api.Ingredients t : ingredientsFromFile)
            myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
-        //Step 2: Return shoppingList
+        // Step 3: Ausgabe analog Hartwig Tasks
        return new ShoppingList(myIngredients);
     }
 

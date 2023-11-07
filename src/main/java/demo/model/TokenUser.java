@@ -10,6 +10,7 @@ import java.util.Map;
 public class TokenUser {
 
     private String token;
+
     private User user;
 
     @JsonIgnore
