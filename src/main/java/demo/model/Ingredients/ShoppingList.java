@@ -1,43 +1,39 @@
-package demo.model;
+package demo.model.Ingredients;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import demo.model.Ingredients.Ingredients;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TokenUser {
+public class ShoppingList {
 
-    private String token;
+    private Collection<Ingredients> Ingredient;
 
-    private User user;
+    private String name;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public TokenUser() {
+    public ShoppingList() { }
+
+    public ShoppingList(Collection<Ingredients> Ingr) {
+        this.Ingredient = Ingr;
     }
 
-    public TokenUser(User user, String token) {
-       this.user = user;
-        this.token = token;
+    public Collection<Ingredients> getIngredients() {
+        return Ingredient;
     }
 
-    public String getToken() {
-        return token;
+    public void setIngredients(Collection<Ingredients> Ingr) {
+        this.Ingredient = Ingr;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public String getName() {
+        return name;
     }
 
     @JsonAnyGetter
@@ -50,4 +46,15 @@ public class TokenUser {
         this.additionalProperties.put(name, value);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,25 +1,26 @@
-package demo.model;
+package demo.model.Ingredients;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import demo.model.Ingredients.Ingredients;
 
 import java.util.HashMap;
 import java.util.Map;
-
-public class TokenRecipe {
-
-    private Recipe recipe;
+public class TokenIngredient {
 
     private String token;
+
+    private Ingredients ingredients;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public TokenRecipe(){}
+    public TokenIngredient() {
+    }
 
-    public TokenRecipe(Recipe recipe, String token) {
-        this.recipe = recipe;
+    public TokenIngredient(Ingredients ingredients, String token) {
+        this.ingredients = ingredients;
         this.token = token;
     }
 
@@ -31,12 +32,12 @@ public class TokenRecipe {
         this.token = token;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public Ingredients getIngredients() {
+        return ingredients;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setIngredients(Ingredients ingredients) {
+        this.ingredients = ingredients;
     }
 
     @JsonAnyGetter
@@ -49,3 +50,4 @@ public class TokenRecipe {
         this.additionalProperties.put(name, value);
     }
 }
+
