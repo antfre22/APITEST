@@ -218,7 +218,7 @@ public class MappingController {
         return "shoppingList got deleted";
     }
     @DeleteMapping("/shoppinglist/ingredient")
-    public String deleteIngredient(@RequestParam int ingredient) {
+    public String deleteIngredient(@RequestParam String ingredient) {
         //Step 1: Check Token
         listManager.deleteIngredient(ingredient);
         //Step 2: delete specific ingredient from shopping List in der DB
@@ -226,8 +226,8 @@ public class MappingController {
     }
 
     @DeleteMapping("/shoppinglist/ingredientzwei")
-    public String deleteIngredientzwei(@RequestBody TokenIngredient ingredient) {
-        listManager.deleteIngredientZwei(ingredient.getIngredients().getName());
+    public String deleteIngredient(@RequestBody TokenIngredient ingredient) {
+        listManager.deleteIngredient(ingredient.getIngredients().getName());
         return "Following Ingredient deleted: " + ingredient.getIngredients().getName() ;
     }
 
@@ -315,7 +315,7 @@ public class MappingController {
         alexaRO.setResponse(response);
         return alexaRO;
     }
-
+    //TestNeu
     //TestAlexa
     @PostMapping(
             path = "/alexa",
