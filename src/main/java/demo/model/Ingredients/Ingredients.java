@@ -1,38 +1,41 @@
-package demo.model;
+package demo.model.Ingredients;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShoppingList {
+public class Ingredients {
 
-    private Collection<demo.model.Ingredients> Ingredient;
-
-    private String name;
+    private String name = "";
+    private float quantity = 0;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public ShoppingList() { }
+    public Ingredients() { }
 
-    public ShoppingList(Collection<demo.model.Ingredients> Ingr) {
-        this.Ingredient = Ingr;
-    }
-
-    public Collection<demo.model.Ingredients> getIngredients() {
-        return Ingredient;
-    }
-
-    public void setIngredients(Collection<Ingredients> Ingr) {
-        this.Ingredient = Ingr;
+    public Ingredients(String name, float quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
     }
 
     @JsonAnyGetter
@@ -45,15 +48,3 @@ public class ShoppingList {
         this.additionalProperties.put(name, value);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

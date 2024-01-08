@@ -7,11 +7,15 @@ import demo.data.api.ListManager;
 import demo.data.api.User;
 import demo.data.impl.*;
 
-import demo.model.*;
 import demo.model.Alexa.AlexaRO;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
-import demo.model.ShoppingList;
+import demo.model.Ingredients.TokenIngredient;
+import demo.model.Recipe.RecipeList;
+import demo.model.Recipe.TokenRecipe;
+import demo.model.Ingredients.ShoppingList;
+import demo.model.User.TokenUser;
+import demo.model.User.UserList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -86,7 +90,8 @@ public class MappingController {
     @ResponseStatus(HttpStatus.OK)
     public String registerUser(@RequestBody TokenUser TokenUser) {
 
-        String rs = userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(), TokenUser.getUser().getUserPassword(), TokenUser.getUser().getUserEmail());
+        String rs = userManager.createUser(TokenUser.getUser().getFirstName(),TokenUser.getUser().getLastName(),
+                TokenUser.getUser().getUserPassword(), TokenUser.getUser().getUserEmail());
 
     //    return new SendBackToken("uavoiggpvagiv", 360);
         return rs;
@@ -136,10 +141,10 @@ public class MappingController {
                 .log(Level.INFO,"MappingController /user/all ");
             //Step 1: fetch data from DB
         List<User> usersfromDB = userManager.readAllUsers();
-        List<demo.model.User> myUsers = new ArrayList<>();
+        List<demo.model.User.User> myUsers = new ArrayList<>();
             //Step 2: Ausgabe einer Liste mit den Usern und ihren Daten
         for(User user : usersfromDB) {
-            myUsers.add(new demo.model.User(user.getEmail(),user.getPasswort(),
+            myUsers.add(new demo.model.User.User(user.getEmail(),user.getPasswort(),
                     user.getLastName(), user.getFirstName(), user.getToken()));
         }
         return new UserList(myUsers);
@@ -174,10 +179,17 @@ public class MappingController {
                 .log(Level.INFO,"MappingController /ingredients/all ");
         //Step 1: Check Token
         //Step 2: fetch shoppingList from DB
+<<<<<<< HEAD
       List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
        List<demo.model.Ingredients> myIngredients = new ArrayList<>();
        for (demo.data.api.Ingredients t : ingredientsFromFile)
            myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
+=======
+        List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
+        List<demo.model.Ingredients.Ingredients> myIngredients = new ArrayList<>();
+        for (demo.data.api.Ingredients t : ingredientsFromFile)
+            myIngredients.add(new demo.model.Ingredients.Ingredients(t.getName(), t.getQuantity()));
+>>>>>>> origin/master
         // Step 3: Ausgabe analog Hartwig Tasks
        return new ShoppingList(myIngredients);
     }
@@ -253,9 +265,9 @@ public class MappingController {
         //Step 1: Check Token
         //Step 2: fetch shoppingList from DB
         List <demo.data.api.Recipe> recipesFromFile = recipeManager.readAllRecipes();
-        List<demo.model.Recipe> myRecipes = new ArrayList<>();
+        List<demo.model.Recipe.Recipe> myRecipes = new ArrayList<>();
         for (demo.data.api.Recipe t : recipesFromFile)
-            myRecipes.add(new demo.model.Recipe(t.getRecipeName(),t.getDate()));
+            myRecipes.add(new demo.model.Recipe.Recipe(t.getRecipeName(),t.getDate()));
         // Step 3: Ausgabe analog Hartwig Tasks
         return new RecipeList(myRecipes);
     }
@@ -315,7 +327,7 @@ public class MappingController {
         alexaRO.setResponse(response);
         return alexaRO;
     }
-    //TestNeu
+
     //TestAlexa
     @PostMapping(
             path = "/alexa",

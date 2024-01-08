@@ -1,31 +1,33 @@
-package demo.model;
+package demo.model.Recipe;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import demo.model.Recipe.Recipe;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-public class UserList {
 
-    private Collection<User> users;
+public class RecipeList {
+
+    private Collection<Recipe> recipes;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public UserList() { }
+    public RecipeList() { }
 
-    public UserList(Collection<User> users) {
-        this.users = users;
+    public RecipeList(Collection<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public Collection<Recipe> getRecipes() {
+        return recipes;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setRecipes(Collection<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     @JsonAnyGetter
@@ -38,3 +40,5 @@ public class UserList {
         this.additionalProperties.put(name, value);
     }
 }
+
+

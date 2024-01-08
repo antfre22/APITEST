@@ -1,41 +1,43 @@
-package demo.model;
+package demo.model.Recipe;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import demo.model.Recipe.Recipe;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Ingredients {
+public class TokenRecipe {
 
-    private String name = "";
-    private float quantity = 0;
+    private Recipe recipe;
+
+    private String token;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
-    public Ingredients() { }
+    public TokenRecipe(){}
 
-    public Ingredients(String name, float quantity) {
-        this.name = name;
-        this.quantity = quantity;
+    public TokenRecipe(Recipe recipe, String token) {
+        this.recipe = recipe;
+        this.token = token;
     }
 
-    public String getName() {
-        return name;
+    public String getToken() {
+        return token;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public float getQuantity() {
-        return quantity;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setQuantity(float quantity) {
-        this.quantity = quantity;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @JsonAnyGetter
