@@ -2,18 +2,17 @@ package demo;
 
 
 import demo.data.api.*;
-import demo.data.api.Ingredients;
-import demo.data.api.ListManager;
-import demo.data.api.User;
-import demo.data.impl.*;
-
+import demo.data.impl.PostgresDBListManagerImpl;
+import demo.data.impl.PostgresDBRecipeManagerImpl;
+import demo.data.impl.PostgresDBUserManagerImpl;
+import demo.data.impl.UserImpl;
 import demo.model.Alexa.AlexaRO;
 import demo.model.Alexa.OutputSpeechRO;
 import demo.model.Alexa.ResponseRO;
+import demo.model.Ingredients.ShoppingList;
 import demo.model.Ingredients.TokenIngredient;
 import demo.model.Recipe.RecipeList;
 import demo.model.Recipe.TokenRecipe;
-import demo.model.Ingredients.ShoppingList;
 import demo.model.User.TokenUser;
 import demo.model.User.UserList;
 import org.springframework.http.HttpStatus;
@@ -179,19 +178,10 @@ public class MappingController {
                 .log(Level.INFO,"MappingController /ingredients/all ");
         //Step 1: Check Token
         //Step 2: fetch shoppingList from DB
-<<<<<<< HEAD
-      List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
-       List<demo.model.Ingredients> myIngredients = new ArrayList<>();
-       for (demo.data.api.Ingredients t : ingredientsFromFile)
-           myIngredients.add(new demo.model.Ingredients(t.getName(), t.getQuantity()));
-=======
-        List <demo.data.api.Ingredients> ingredientsFromFile = listManager.readAllIngredients();
-        List<demo.model.Ingredients.Ingredients> myIngredients = new ArrayList<>();
-        for (demo.data.api.Ingredients t : ingredientsFromFile)
-            myIngredients.add(new demo.model.Ingredients.Ingredients(t.getName(), t.getQuantity()));
->>>>>>> origin/master
+
         // Step 3: Ausgabe analog Hartwig Tasks
-       return new ShoppingList(myIngredients);
+
+       return new ShoppingList();
     }
 
     /*
