@@ -19,8 +19,8 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: maeb22/apitestrepo
-  USERNAME: maeb22
+  IMAGE_NAME: antfre22/APITEST
+  USERNAME: mar-ebert-22
 
 
 jobs:
