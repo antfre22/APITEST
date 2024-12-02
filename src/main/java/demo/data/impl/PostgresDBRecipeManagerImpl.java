@@ -42,6 +42,7 @@ public class PostgresDBRecipeManagerImpl implements RecipeManager{
         Statement stmt = null;
         Connection connection = null;
 
+        // Kommi
         try {
             connection = basicDataSource.getConnection();
             stmt = connection.createStatement();
