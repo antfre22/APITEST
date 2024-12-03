@@ -18,4 +18,4 @@ COPY build/libs/*.jar app.jar
 EXPOSE 8080
 
 # Starte die Anwendung
-ENTRYPOINT ["java", "-jar", "/build/libs"]
+ENTRYPOINT ["java", "-jar", "build/libs/*.jar app.jar"]
