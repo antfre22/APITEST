@@ -1,22 +1,21 @@
-# Use the official Node.js 20 alphine image
+# Verwenden Sie das neueste JDK 23 Bild von Eclipse Temurin
+FROM eclipse-temurin:23-jdk-alpine
 
-FROM openjdk:23-jdk
-# Set the working directory
-WORKDIR /src
-# Copy package.json and package-lock.json
+# Arbeitsverzeichnis setzen
+WORKDIR /app
 
-COPY target/*.jar app.jar
+# Kopiere die Gradle Wrapper Dateien
+COPY gradlew gradlew.bat ./
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
-# Install dependencies
-RUN npm install
-# Copy the rest of the application
+# Installiere Abhängigkeiten
+COPY build.gradle settings.gradle ./
+RUN ./gradlew build
 
-COPY . .
-# Expose the port the app runs on
-EXPOSE 3000
-# Command to run the app
+# Kopiere die JAR-Datei in das Image
+COPY build/libs/*.jar app.jar
 
-CMD ["npm", "run", "start"]
+# Expose den Port (passe den Port entsprechend deiner Anwendung an)
+EXPOSE 8080
 
-
+# Starte die Anwendung
+ENTRYPOINT ["java", "-jar", "/app.jar"]
