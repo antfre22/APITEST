@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Kopieren der Projektdateien
-COPY build.gradle settings.gradle gradle.properties ./
+COPY build.gradle settings.gradle
 COPY src ./src
 
 # Installieren der Abhängigkeiten
