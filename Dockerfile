@@ -9,7 +9,7 @@ COPY gradlew gradlew.bat ./
 
 # Installiere Abhängigkeiten
 COPY build.gradle settings.gradle ./
-RUN ./gradlew build
+
 
 # Kopiere die JAR-Datei in das Image
 COPY build/libs/*.jar app.jar
