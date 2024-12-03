@@ -1,5 +1,5 @@
 # Verwenden Sie das neueste JDK 23 Bild von Eclipse Temurin
-FROM eclipse-temurin:23-jdk-alpine
+FROM eclipse-temurin:17-alpine
 
 # Arbeitsverzeichnis setzen
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY build.gradle settings.gradle ./
 
 
 # Kopiere die JAR-Datei in das Image
-COPY build/libs/*.jar app.jar
+COPY build/libs/Essensplaner-1.0-SNAPSHOT.jar app.jar
 
 # Expose den Port (passe den Port entsprechend deiner Anwendung an)
 EXPOSE 8080
