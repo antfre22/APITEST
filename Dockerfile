@@ -9,7 +9,7 @@ COPY build.gradle settings.gradle
 COPY src ./src
 
 # Installieren der Abhängigkeiten
-RUN gradle build
+RUN ./gradlew build
 
 # Kopieren der erstellten JAR-Datei
 COPY build/libs/*.jar app.jar
