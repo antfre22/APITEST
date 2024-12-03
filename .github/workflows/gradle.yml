@@ -57,6 +57,9 @@ jobs:
 
     -   name: run npm install
         run: npm install package.json
+
+    -   name: update npm install
+        run: npm update package.json
         
     -
         name: Login to Docker Hub
