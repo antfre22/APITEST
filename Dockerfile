@@ -1,21 +1,21 @@
-# Verwenden Sie das neueste JDK 23 Bild von Eclipse Temurin
-FROM eclipse-temurin:17-alpine
+# Verwenden Sie ein schlankes Basisimage mit Java 17
+FROM openjdk:17-jdk-alpine
 
 # Arbeitsverzeichnis setzen
 WORKDIR /app
 
-# Kopiere die Gradle Wrapper Dateien
-COPY gradlew gradlew.bat ./
+# Kopieren der Projektdateien
+COPY build.gradle settings.gradle gradle.properties ./
+COPY src ./src
 
-# Installiere Abhängigkeiten
-COPY build.gradle settings.gradle ./
+# Installieren der Abhängigkeiten
+RUN gradle build
 
+# Kopieren der erstellten JAR-Datei
+COPY build/libs/*.jar app.jar
 
-# Kopiere die JAR-Datei in das Image
-COPY build/libs/Essensplaner-1.0-SNAPSHOT.jar app.jar
-
-# Expose den Port (passe den Port entsprechend deiner Anwendung an)
+# Expositions des Ports (falls benötigt)
 EXPOSE 8080
 
-# Starte die Anwendung
-ENTRYPOINT ["java", "-jar", "build/libs/*.jar app.jar"]
+# Starten der Anwendung
+ENTRYPOINT ["java","-jar","/app.jar"]
