@@ -2,7 +2,7 @@ FROM openjdk:17-jdk-alpine
 
 WORKDIR /app
 
-COPY build.gradle settings.gradle gradle.properties ./
+COPY build.gradle settings.gradle
 COPY src ./src
 
 RUN apk add gradle
