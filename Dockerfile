@@ -1,11 +1,13 @@
 # Use the official Node.js 20 alphine image
-FROM node:20.0-alpine3.16 as build
 
+FROM openjdk:23-jdk
 # Set the working directory
-WORKDIR /app
+WORKDIR /src
 # Copy package.json and package-lock.json
 
-COPY package*.json ./
+COPY target/*.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
 # Install dependencies
 RUN npm install
 # Copy the rest of the application
@@ -16,3 +18,5 @@ EXPOSE 3000
 # Command to run the app
 
 CMD ["npm", "run", "start"]
+
+
