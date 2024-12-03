@@ -44,8 +44,8 @@ jobs:
       with: 
           image: maeb22/apitestrepo
           registry: docker.io
-          username: ${{ secrets.docker_username }}
-          password: ${{ secrets.docker_password }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           
 
      
